@@ -1,0 +1,153 @@
+"use client";
+
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { ADVISORS, AdvisorId } from "@/lib/agents";
+
+type Msg = { role: "user" | "assistant"; content: string };
+
+const OPENERS: Record<AdvisorId, string> = {
+  qingxing: "你好，我是青杏。把你的省份和全省位次告诉我（只有分数的话，先去一分一段表查位次），我们从定位开始。",
+  qingtang: "你好，我是青棠。说说你现在纠结的专业，或者讲讲你平时做什么事最投入，我们从证据开始。",
+  qingwu: "你好，我是青梧。说说你们家现在在吵什么：谁想报什么、谁反对、反对的理由是什么，我来帮你们把话捋顺。",
+};
+
+function ChatInner() {
+  const params = useSearchParams();
+  const initial = (params.get("advisor") as AdvisorId) || "qingxing";
+  const [advisorId, setAdvisorId] = useState<AdvisorId>(ADVISORS.some((a) => a.id === initial) ? initial : "qingxing");
+  const [messages, setMessages] = useState<Msg[]>([]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  const advisor = ADVISORS.find((a) => a.id === advisorId)!;
+
+  useEffect(() => {
+    setMessages([]);
+    setInput("");
+  }, [advisorId]);
+
+  useEffect(() => {
+    boxRef.current?.scrollTo({ top: boxRef.current.scrollHeight });
+  }, [messages]);
+
+  async function send() {
+    const text = input.trim();
+    if (!text || busy) return;
+    const next = [...messages, { role: "user" as const, content: text }];
+    setMessages(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ advisorId, messages: next }),
+      });
+      if (!res.ok || !res.body) {
+        const err = await res.json().catch(() => ({ error: "服务暂不可用" }));
+        setMessages((m) => [...m, { role: "assistant", content: "出错了：" + (err.error || res.status) }]);
+        setBusy(false);
+        return;
+      }
+      setMessages((m) => [...m, { role: "assistant", content: "" }]);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = "";
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() || "";
+        for (const line of lines) {
+          const t = line.trim();
+          if (!t.startsWith("data:")) continue;
+          const payload = t.slice(5).trim();
+          if (payload === "[DONE]") continue;
+          try {
+            const json = JSON.parse(payload);
+            const delta = json.choices?.[0]?.delta?.content || "";
+            if (delta) {
+              setMessages((m) => {
+                const copy = [...m];
+                const last = copy[copy.length - 1];
+                if (last && last.role === "assistant") copy[copy.length - 1] = { ...last, content: last.content + delta };
+                return copy;
+              });
+            }
+          } catch {}
+        }
+      }
+    } catch {
+      setMessages((m) => [...m, { role: "assistant", content: "网络异常，请稍后重试。" }]);
+    }
+    setBusy(false);
+  }
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8 h-[calc(100vh-3.5rem)] flex flex-col">
+      <div className="flex gap-2 overflow-x-auto pb-3">
+        {ADVISORS.map((a) => (
+          <button
+            key={a.id}
+            onClick={() => setAdvisorId(a.id)}
+            className={"shrink-0 px-4 py-2 rounded-full text-sm transition-colors " + (advisorId === a.id ? "text-white font-medium" : "bg-white border border-black/10 hover:border-gold")}
+            style={advisorId === a.id ? { background: a.color } : undefined}
+          >
+            {a.name} · {a.title}
+          </button>
+        ))}
+      </div>
+
+      <p className="text-xs text-ink/50 bg-white border border-black/5 rounded-xl px-4 py-2 mb-3">{advisor.intro}</p>
+
+      <div ref={boxRef} className="flex-1 overflow-y-auto bg-white rounded-2xl border border-black/5 p-4 space-y-3">
+        {messages.length === 0 && (
+          <div className="text-sm text-ink/50 leading-relaxed whitespace-pre-wrap">{OPENERS[advisorId]}</div>
+        )}
+        {messages.map((m, i) => (
+          <div key={i} className={"flex " + (m.role === "user" ? "justify-end" : "justify-start")}>
+            <div
+              className={"max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap " + (m.role === "user" ? "bg-ink text-paper rounded-br-sm" : "bg-paper rounded-bl-sm")}
+            >
+              {m.content || "..."}
+            </div>
+          </div>
+        ))}
+        {busy && messages[messages.length - 1]?.role === "assistant" && !messages[messages.length - 1]?.content && (
+          <div className="text-xs text-ink/40">正在思考...</div>
+        )}
+      </div>
+
+      <div className="mt-3 flex gap-2">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
+          placeholder="输入你的情况或问题，Enter 发送"
+          className="flex-1 bg-white border border-black/10 rounded-full px-5 py-3 text-sm outline-none focus:border-gold"
+          disabled={busy}
+        />
+        <button
+          onClick={send}
+          disabled={busy || !input.trim()}
+          className="bg-gold text-ink px-6 rounded-full text-sm font-medium disabled:opacity-40 hover:bg-gold-light transition-colors"
+        >
+          发送
+        </button>
+      </div>
+      <p className="mt-2 text-[11px] text-ink/40 text-center">
+        顾问只提供决策方法参考，不提供分数线与录取预测；最终以各省考试院与院校官方信息为准。
+      </p>
+    </div>
+  );
+}
+
+export default function ChatPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-sm text-ink/50">加载中...</div>}>
+      <ChatInner />
+    </Suspense>
+  );
+}
