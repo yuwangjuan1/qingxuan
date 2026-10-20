@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #C9A227;
+  --color-gold-light: #F2D06B;
+  --color-ink: #0E1B2C;
+  --color-ink-soft: #1C2E45;
+  --color-jade: #2EA3A6;
+  --color-paper: #F7F5F0;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
