@@ -25,10 +25,13 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 pb-16">
-      <div className="page-banner -mx-4 px-6 md:px-0">
-        <div className="max-w-4xl mx-auto pt-6 pb-10">
-          <Link href="/majors" className="text-sm text-ink/45 hover:text-gold-dark transition-colors">
+    <div className="pb-16">
+      <div className="banner-deep text-white">
+        <div className="banner-orb banner-orb-a" />
+        <div className="banner-orb banner-orb-b" />
+        <div className="banner-grid" />
+        <div className="max-w-[1200px] mx-auto px-4 pt-8 pb-14">
+          <Link href="/majors" className="text-sm text-white/55 hover:text-white transition-colors">
             ← 返回列表
           </Link>
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -51,6 +54,7 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
         </div>
       </div>
 
+      <div className="max-w-4xl mx-auto px-4">
       <section className="card p-7 -mt-5 relative rounded-3xl">
         <h2 className="font-bold text-lg mb-3 flex items-center gap-2">
           <span className="section-line !w-6" />
@@ -108,6 +112,7 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
           青棠
         </Link>
         做一次三角定位，用证据代替感觉。
+      </div>
       </div>
     </div>
   );

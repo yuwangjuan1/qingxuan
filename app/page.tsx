@@ -51,12 +51,17 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="hero-blue text-paper">
+      <section className="banner-deep text-white">
+        <div className="banner-orb banner-orb-a" />
+        <div className="banner-orb banner-orb-b" />
+        <div className="banner-orb banner-orb-c" />
+        <div className="banner-grid" />
         <div className="relative max-w-[1200px] mx-auto px-4 py-28 md:py-40">
-          <p className="inline-flex items-center gap-2 text-[#CFE3FF] text-xs tracking-[0.3em] mb-6 border border-white/25 bg-white/10 rounded-full px-4 py-1.5">
+          <p className="banner-rise inline-flex items-center gap-2 text-[#CFE3FF] text-xs tracking-[0.3em] mb-6 border border-white/25 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-light animate-pulse" />
             高考志愿决策平台
           </p>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug max-w-3xl">
+          <h1 className="banner-rise text-4xl md:text-6xl font-bold leading-tight md:leading-snug max-w-3xl" style={{ animationDelay: "90ms" }}>
             大厂告诉你能上哪些学校，
             <br />
             我们帮你想清楚
@@ -66,14 +71,14 @@ export default function Home() {
             </span>
             。
           </h1>
-          <p className="mt-7 text-paper/75 max-w-2xl leading-loose text-base md:text-lg">
+          <p className="banner-rise mt-7 text-white/75 max-w-2xl leading-loose text-base md:text-lg" style={{ animationDelay: "180ms" }}>
             不预测分数线，不承诺录取结果。青选提供择校方法、专业祛魅与家庭调解，
             配三位 AI 顾问，陪你把志愿表从吵成一团填到全票通过。
           </p>
-          <div className="mt-10 flex gap-4 flex-wrap">
+          <div className="banner-rise mt-10 flex gap-4 flex-wrap" style={{ animationDelay: "270ms" }}>
             <Link
               href="/chat"
-              className="bg-white text-[#123C7A] px-8 py-3.5 rounded-full font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              className="bg-white text-[#003AA8] px-8 py-3.5 rounded-full font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
             >
               开始咨询顾问 →
             </Link>
@@ -84,13 +89,13 @@ export default function Home() {
               先用免费工具
             </Link>
           </div>
-          <div className="mt-14 flex gap-x-10 gap-y-4 flex-wrap">
+          <div className="banner-rise mt-14 flex gap-x-10 gap-y-4 flex-wrap" style={{ animationDelay: "360ms" }}>
             {stats.map((s) => (
               <div key={s.label} className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-white">
                   {s.num}
                 </span>
-                <span className="text-sm text-paper/60">{s.label}</span>
+                <span className="text-sm text-white/60">{s.label}</span>
               </div>
             ))}
           </div>

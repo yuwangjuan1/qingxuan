@@ -1,15 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import PageBanner from "@/app/components/PageBanner";
 import { GLOSSARY, PITFALLS, CALENDAR, FAQ } from "@/lib/data/knowledge";
 
 const TABS = ["名词词典", "避坑指南", "填报日历", "高频问答"] as const;
 
 const catStyle: Record<string, string> = {
-  规则: "bg-jade/10 text-jade",
-  数据: "bg-gold/10 text-gold",
-  流程: "bg-ink/5 text-ink/70",
-  风险: "bg-red-50 text-red-600",
+  规则: "bg-jade/10 text-jade border-jade/20",
+  数据: "bg-gold/10 text-gold-dark border-gold/25",
+  流程: "bg-ink/5 text-ink/70 border-ink/10",
+  风险: "bg-red-50 text-red-600 border-red-200",
 };
 
 export default function GuidePage() {
@@ -26,13 +27,14 @@ export default function GuidePage() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-14">
-      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
-        <h1 className="text-3xl md:text-4xl font-bold">填报指南</h1>
-        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          一站式知识底座：规则名词、经典坑位、时间线、高频疑问。填报前过一遍，少走九成弯路。
-        </p>
-      </div>
+    <div>
+      <PageBanner
+        slides={[
+          { tag: "填报指南", title: "填报前过一遍，少走九成弯路", desc: "12 个规则名词、8 个经典坑位、高三全年时间线、10 条高频疑问。一站式补齐志愿填报的规则知识。" },
+          { tag: "填报指南", title: "平行志愿怎么投档？", desc: "分数优先、遵循志愿、一轮投档为什么会有退档，为什么必须拉开梯度，词典里讲得明明白白。" },
+          { tag: "填报指南", title: "八大经典坑位", desc: "不看组构成冲校名、体检限制漏检、热门专业当保底每年真实发生的翻车现场，逐个给你正确动作。" },
+        ]}
+      />
 
       <div className="mt-8 flex flex-wrap gap-2">
         {TABS.map((t) => (
