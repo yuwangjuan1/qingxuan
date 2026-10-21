@@ -3,14 +3,26 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "青选  高考择校择专业决策平台",
-  description: "不预测分数线，只教你怎么选。学校介绍、择校方法、专业定位、竞争态势与就业形势分析，青杏青棠青梧三位 AI 顾问陪伴全家做决定。",
+  title: {
+    default: "青选 QingXuan · 高考志愿决策平台",
+    template: "%s · 青选 QingXuan",
+  },
+  description:
+    "不预测分数线，只教你怎么选。34 所院校卡、24 个专业祛魅、位次工具与填报指南，青杏青棠青梧三位 AI 顾问陪伴全家做决定。",
+  keywords: ["高考志愿", "志愿填报", "择校", "选专业", "冲稳保", "位次", "高考", "专业选择"],
+  openGraph: {
+    title: "青选 QingXuan · 高考志愿决策平台",
+    description: "大厂告诉你能上哪些学校，我们帮你想清楚该上哪个。",
+    type: "website",
+    locale: "zh_CN",
+  },
 };
 
 const nav = [
   { href: "/schools", label: "学校介绍" },
   { href: "/majors", label: "专业定位" },
   { href: "/tools", label: "择校工具" },
+  { href: "/guide", label: "填报指南" },
   { href: "/insights", label: "竞争与就业" },
   { href: "/chat", label: "AI 顾问" },
 ];

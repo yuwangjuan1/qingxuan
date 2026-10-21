@@ -12,6 +12,24 @@ const OPENERS: Record<AdvisorId, string> = {
   qingwu: "你好，我是青梧。说说你们家现在在吵什么：谁想报什么、谁反对、反对的理由是什么，我来帮你们把话捋顺。",
 };
 
+const QUICKS: Record<AdvisorId, string[]> = {
+  qingxing: [
+    "平行志愿的投档规则讲一下，为什么会有退档？",
+    "冲稳保到底怎么排比例？保底怎么选才算真的保得住？",
+    "我的位次在两所院校之间摇摆，怎么定先后顺序？",
+  ],
+  qingtang: [
+    "信息管理与信息系统是学编程的吗？名字像计算机的区别在哪？",
+    "想学计算机但分数差几分，软件工程值不值得报？",
+    "孩子想学人工智能，这个专业本科毕业好找工作吗？",
+  ],
+  qingwu: [
+    "爸爸坚持考公、孩子想学设计，聊崩了怎么办？",
+    "家里觉得师范稳，孩子死活不想当老师，怎么开这个家庭会？",
+    "临近提交还谈不拢，有没有先保底的折中办法？",
+  ],
+};
+
 function ChatInner() {
   const params = useSearchParams();
   const initial = (params.get("advisor") as AdvisorId) || "qingxing";
@@ -104,7 +122,20 @@ function ChatInner() {
 
       <div ref={boxRef} className="flex-1 overflow-y-auto bg-white rounded-2xl border border-black/5 p-4 space-y-3">
         {messages.length === 0 && (
-          <div className="text-sm text-ink/50 leading-relaxed whitespace-pre-wrap">{OPENERS[advisorId]}</div>
+          <div className="text-sm text-ink/50 leading-relaxed">
+            <p className="whitespace-pre-wrap">{OPENERS[advisorId]}</p>
+            <div className="mt-4 flex flex-col gap-2">
+              {QUICKS[advisorId].map((q) => (
+                <button
+                  key={q}
+                  onClick={() => setInput(q)}
+                  className="text-left text-sm text-ink/70 bg-paper border border-black/5 rounded-xl px-4 py-2.5 hover:border-gold hover:text-ink transition-colors"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
         {messages.map((m, i) => (
           <div key={i} className={"flex " + (m.role === "user" ? "justify-end" : "justify-start")}>

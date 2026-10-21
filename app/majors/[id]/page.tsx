@@ -1,14 +1,20 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MAJORS, TRAP_LABEL } from "@/lib/data/majors";
+import { ALL_MAJORS, TRAP_LABEL } from "@/lib/data/majors";
 
 export function generateStaticParams() {
-  return MAJORS.map((m) => ({ id: m.id }));
+  return ALL_MAJORS.map((m) => ({ id: m.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const m = ALL_MAJORS.find((x) => x.id === id);
+  return { title: m ? m.name + " · 学什么、出口在哪" : "专业定位" };
 }
 
 export default async function MajorDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const m = MAJORS.find((x) => x.id === id);
+  const m = ALL_MAJORS.find((x) => x.id === id);
   if (!m) notFound();
 
   const exits = [
