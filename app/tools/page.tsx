@@ -104,12 +104,14 @@ export default function ToolsPage() {
   return (
     <div>
       <PageBanner
+        theme="blue"
         tag="择校工具"
         title="五个工具，把纠结变成动作"
         desc="位次分档、梯度自查、防退档终检、志愿清单、二选一矩阵。全部在本地浏览器计算，不收集任何信息。"
       />
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="mt-10 flex flex-wrap gap-2">
         {TABS.map((t) => (
           <button
             key={t}
@@ -387,6 +389,7 @@ export default function ToolsPage() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

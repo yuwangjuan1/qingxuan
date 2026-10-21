@@ -31,14 +31,17 @@ export default function SchoolsPage() {
 
   return (
     <div>
-      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
-        <h1 className="text-3xl md:text-4xl font-bold">学校介绍</h1>
-        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          {ALL_SCHOOLS.length} 所结构化院校卡：实力在哪、政策如何、坑在哪。信息来自公开资料整理，报考前请核对当年招生章程。
-        </p>
-      </div>
+      <PageBanner
+        theme="orange"
+        slides={[
+          { tag: "学校介绍", title: "34 所院校，结构化拆解", desc: "学科实力、转专业政策、报考避坑点，一张卡讲清一所学校。信息来自公开资料整理，报考前请核对当年招生章程。" },
+          { tag: "学校介绍", title: "不只看校名，要看专业组", desc: "同一所大学的不同专业组，命运可能天差地别。逐卡标注了调剂风险与校区差异，帮你避开「以为的和实际的」落差。" },
+          { tag: "学校介绍", title: "搜索 + 筛选，快速定位", desc: "按 985/211/双非、综合/理工/财经/师范分类筛选，支持校名、城市、关键词搜索，三十秒圈定候选池。" },
+        ]}
+      />
 
-      <div className="mt-8 space-y-4">
+      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="mt-10 space-y-4">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -108,6 +111,7 @@ export default function SchoolsPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

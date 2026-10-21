@@ -29,14 +29,16 @@ export default function GuidePage() {
   return (
     <div>
       <PageBanner
+        theme="violet"
         slides={[
           { tag: "填报指南", title: "填报前过一遍，少走九成弯路", desc: "12 个规则名词、8 个经典坑位、高三全年时间线、10 条高频疑问。一站式补齐志愿填报的规则知识。" },
-          { tag: "填报指南", title: "平行志愿怎么投档？", desc: "分数优先、遵循志愿、一轮投档为什么会有退档，为什么必须拉开梯度，词典里讲得明明白白。" },
-          { tag: "填报指南", title: "八大经典坑位", desc: "不看组构成冲校名、体检限制漏检、热门专业当保底每年真实发生的翻车现场，逐个给你正确动作。" },
+          { tag: "填报指南", title: "平行志愿怎么投档？", desc: "分数优先、遵循志愿、一轮投档——为什么会有退档，为什么必须拉开梯度，词典里讲得明明白白。" },
+          { tag: "填报指南", title: "八大经典坑位", desc: "不看组构成冲校名、体检限制漏检、热门专业当保底……每年真实发生的翻车现场，逐个给你正确动作。" },
         ]}
       />
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="mt-10 flex flex-wrap gap-2">
         {TABS.map((t) => (
           <button
             key={t}
@@ -188,6 +190,7 @@ export default function GuidePage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

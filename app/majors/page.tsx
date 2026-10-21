@@ -30,14 +30,17 @@ export default function MajorsPage() {
 
   return (
     <div>
-      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
-        <h1 className="text-3xl md:text-4xl font-bold">专业定位</h1>
-        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          {ALL_MAJORS.length} 个专业讲清四件事：学什么、四个出口、适合谁、坑在哪。已收录 {trapCount} 个名称陷阱专业，报前先祛魅。
-        </p>
-      </div>
+      <PageBanner
+        theme="emerald"
+        slides={[
+          { tag: "专业定位", title: "24 个专业，先祛魅再心动", desc: "学什么、四个出口、适合谁、坑在哪——每个专业讲清四件事。名称陷阱逐个拆穿，报前心里有底。" },
+          { tag: "专业定位", title: "名称陷阱逐个拆穿", desc: "信息与计算科学是数学、生物医学工程不能当医生……名字像 A 实际是 B 的专业，这里逐个标注，报前先祛魅。" },
+          { tag: "专业定位", title: "四出口地图", desc: "就业、深造、考公、其他路径，四个出口各是什么样，一张图看完再决定报不报。" },
+        ]}
+      />
 
-      <div className="mt-8 space-y-4">
+      <div className="max-w-[1200px] mx-auto px-4">
+      <div className="mt-10 space-y-4">
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -100,6 +103,7 @@ export default function MajorsPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }
