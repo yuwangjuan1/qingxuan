@@ -30,6 +30,46 @@ const QUICKS: Record<AdvisorId, string[]> = {
   ],
 };
 
+// 轻量 Markdown 渲染：只处理加粗、行内代码和标题，避免为聊天引入重型依赖
+function renderInline(text: string, keyPrefix: string) {
+  return text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+      return (
+        <strong key={keyPrefix + i} className="font-semibold text-ink">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      return (
+        <code key={keyPrefix + i} className="px-1 py-0.5 rounded bg-ink/6 text-[13px]">
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+    return <span key={keyPrefix + i}>{part}</span>;
+  });
+}
+
+function RichText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split("\n").map((line, i) => {
+        const heading = line.match(/^#{1,6}\s+(.*)$/);
+        if (heading) {
+          return (
+            <p key={i} className="font-semibold text-ink mt-2.5 first:mt-0">
+              {renderInline(heading[1], `h${i}-`)}
+            </p>
+          );
+        }
+        if (line.trim() === "") return <div key={i} className="h-2.5" />;
+        return <p key={i}>{renderInline(line, `l${i}-`)}</p>;
+      })}
+    </>
+  );
+}
+
 function ChatInner() {
   const params = useSearchParams();
   const initial = (params.get("advisor") as AdvisorId) || "qingxing";
@@ -208,11 +248,13 @@ function ChatInner() {
             )}
             <div
               className={
-                "max-w-[82%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap " +
-                (m.role === "user" ? "bg-blue text-white rounded-br-sm" : "bg-paper border border-ink/5 rounded-bl-sm")
+                "max-w-[82%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed " +
+                (m.role === "user"
+                  ? "bg-blue text-white rounded-br-sm whitespace-pre-wrap"
+                  : "bg-paper border border-ink/5 rounded-bl-sm")
               }
             >
-              {m.content || "..."}
+              {m.content ? m.role === "user" ? m.content : <RichText text={m.content} /> : "..."}
             </div>
           </div>
         ))}
