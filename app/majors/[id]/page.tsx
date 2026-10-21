@@ -26,26 +26,26 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
 
   return (
     <div className="max-w-4xl mx-auto px-4 pb-16">
-      <div className="page-banner text-paper -mx-4 px-6 md:px-0">
+      <div className="page-banner -mx-4 px-6 md:px-0">
         <div className="max-w-4xl mx-auto pt-6 pb-10">
-          <Link href="/majors" className="text-sm text-paper/50 hover:text-gold-light transition-colors">
+          <Link href="/majors" className="text-sm text-ink/45 hover:text-gold-dark transition-colors">
             ← 返回列表
           </Link>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <h1 className="text-3xl md:text-4xl font-bold">{m.name}</h1>
-            <span className="text-xs text-paper/60 bg-white/10 border border-white/15 px-3 py-1 rounded-full">
+            <span className="text-xs text-ink/60 bg-ink/5 border border-ink/10 px-3 py-1 rounded-full">
               {m.category}
             </span>
             {m.isTrap && (
-              <span className="text-xs text-red-300 bg-red-500/15 border border-red-400/30 px-3 py-1 rounded-full">
+              <span className="text-xs text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full">
                 {TRAP_LABEL}
               </span>
             )}
           </div>
           {m.isTrap && (
-            <div className="mt-5 rounded-2xl p-5 bg-red-500/10 border border-red-400/25">
-              <h2 className="font-bold text-red-300 mb-1.5 text-sm">先祛魅再心动</h2>
-              <p className="text-sm leading-loose text-paper/70">{m.trapNote}</p>
+            <div className="mt-5 rounded-2xl p-5 bg-red-50/80 border border-red-100">
+              <h2 className="font-bold text-red-700 mb-1.5 text-sm">先祛魅再心动</h2>
+              <p className="text-sm leading-loose text-red-900/70">{m.trapNote}</p>
             </div>
           )}
         </div>

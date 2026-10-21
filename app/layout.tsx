@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN">
       <body className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 bg-ink/90 backdrop-blur-md text-paper border-b border-white/10">
+        <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-lg text-ink border-b border-ink/[0.06] shadow-[0_1px_12px_rgba(14,27,44,0.04)]">
           <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-light to-gold text-ink font-bold flex items-center justify-center text-sm shadow-gold">
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="font-bold tracking-widest text-base">
                   青选<span className="text-gold">.</span>
                 </span>
-                <span className="text-[10px] tracking-[0.2em] opacity-50 mt-0.5">QINGXUAN</span>
+                <span className="text-[10px] tracking-[0.2em] text-ink/40 mt-0.5">QINGXUAN</span>
               </span>
             </Link>
             <nav className="hidden md:flex items-center gap-1 text-sm">
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="px-3.5 py-2 rounded-full text-paper/70 hover:text-gold-light hover:bg-white/5 transition-colors"
+                  className="px-3.5 py-2 rounded-full text-ink/60 hover:text-gold-dark hover:bg-gold/[0.07] transition-colors"
                 >
                   {n.label}
                 </Link>

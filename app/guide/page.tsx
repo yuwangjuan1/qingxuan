@@ -27,9 +27,9 @@ export default function GuidePage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-14">
-      <div className="page-banner text-paper rounded-3xl px-8 py-10 md:px-12">
+      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">填报指南</h1>
-        <p className="mt-3 text-paper/60 max-w-2xl leading-relaxed text-sm md:text-base">
+        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
           一站式知识底座：规则名词、经典坑位、时间线、高频疑问。填报前过一遍，少走九成弯路。
         </p>
       </div>

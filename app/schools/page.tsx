@@ -30,9 +30,9 @@ export default function SchoolsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-14">
-      <div className="page-banner text-paper rounded-3xl px-8 py-10 md:px-12">
+      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">学校介绍</h1>
-        <p className="mt-3 text-paper/60 max-w-2xl leading-relaxed text-sm md:text-base">
+        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
           {ALL_SCHOOLS.length} 所结构化院校卡：实力在哪、政策如何、坑在哪。信息来自公开资料整理，报考前请核对当年招生章程。
         </p>
       </div>
