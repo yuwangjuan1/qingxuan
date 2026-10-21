@@ -120,7 +120,7 @@ function ChatInner() {
 
       <p className="text-xs text-ink/50 bg-white border border-black/5 rounded-xl px-4 py-2 mb-3">{advisor.intro}</p>
 
-      <div ref={boxRef} className="flex-1 overflow-y-auto bg-white rounded-2xl border border-black/5 p-4 space-y-3">
+      <div ref={boxRef} className="card flex-1 overflow-y-auto p-5 space-y-4">
         {messages.length === 0 && (
           <div className="text-sm text-ink/50 leading-relaxed">
             <p className="whitespace-pre-wrap">{OPENERS[advisorId]}</p>
@@ -157,7 +157,7 @@ function ChatInner() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
           placeholder="输入你的情况或问题，Enter 发送"
-          className="flex-1 bg-white border border-black/10 rounded-full px-5 py-3 text-sm outline-none focus:border-gold"
+          className="field flex-1 rounded-full px-5 py-3 text-sm"
           disabled={busy}
         />
         <button

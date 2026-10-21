@@ -101,16 +101,25 @@ export default function ToolsPage() {
   }, [wishes]);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold">择校工具</h1>
-      <p className="mt-2 text-ink/60">把方法论变成可勾选的动作。所有结果只在你本地浏览器里计算，不收集任何信息。</p>
+    <div className="max-w-4xl mx-auto px-4 py-14">
+      <div className="page-banner text-paper rounded-3xl px-8 py-10 md:px-12">
+        <h1 className="text-3xl md:text-4xl font-bold">择校工具</h1>
+        <p className="mt-3 text-paper/60 max-w-2xl leading-relaxed text-sm md:text-base">
+          把方法论变成可勾选的动作。所有结果只在你本地浏览器里计算，不收集任何信息。
+        </p>
+      </div>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+      <div className="mt-8 flex flex-wrap gap-2">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={"px-4 py-2 rounded-full text-sm transition-colors " + (tab === t ? "bg-ink text-gold font-medium" : "bg-white border border-black/10 hover:border-gold")}
+            className={
+              "px-5 py-2.5 rounded-full text-sm transition-all " +
+              (tab === t
+                ? "bg-ink text-gold font-medium shadow-card"
+                : "bg-white border border-ink/10 text-ink/60 hover:border-gold hover:text-gold")
+            }
           >
             {t}
           </button>
@@ -118,7 +127,7 @@ export default function ToolsPage() {
       </div>
 
       {tab === "冲稳保定位计算器" && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
+        <div className="card mt-6 p-7">
           <h2 className="font-bold mb-1">用位次给候选院校分档</h2>
           <p className="text-sm text-ink/50 mb-4">
             输入你的全省位次，再填候选院校近三年录取位次（在省考试院或院校官网查），自动给出冲/稳/保分档。口径：录取位次小于你的=冲；差距 15% 以内=稳；更大=保。
@@ -130,7 +139,7 @@ export default function ToolsPage() {
               onChange={(e) => setMyRank(e.target.value.replace(/\D/g, ""))}
               placeholder="如 18500"
               inputMode="numeric"
-              className="w-40 bg-paper border border-black/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-gold"
+              className="field w-40 rounded-xl px-4 py-2 text-sm"
             />
           </div>
           <div className="mt-5 space-y-3">
@@ -141,12 +150,12 @@ export default function ToolsPage() {
               const avg = grades.length ? grades.reduce((c, g) => c + (g === "冲" ? 0 : g === "稳" ? 1 : 2), 0) / grades.length : -1;
               const final = avg < 0 ? "" : avg < 0.5 ? "冲" : avg <= 1.4 ? "稳" : "保";
               return (
-                <div key={ri} className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-paper">
+                <div key={ri} className="flex flex-wrap items-center gap-2 p-3.5 rounded-xl bg-paper-dark/50 border border-ink/5">
                   <input
                     value={r.name}
                     onChange={(e) => setRows((a) => a.map((x, i) => (i === ri ? { ...x, name: e.target.value } : x)))}
                     placeholder={"院校/专业组 " + (ri + 1)}
-                    className="w-44 bg-white border border-black/10 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gold"
+                    className="field w-44 rounded-lg px-3 py-1.5 text-sm"
                   />
                   {r.ranks.map((rank, qi) => (
                     <input
@@ -161,7 +170,7 @@ export default function ToolsPage() {
                       }
                       placeholder={["前年位次", "去年位次", "今年位次"][qi]}
                       inputMode="numeric"
-                      className="w-24 bg-white border border-black/10 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gold"
+                      className="field w-24 rounded-lg px-3 py-1.5 text-sm"
                     />
                   ))}
                   {valid && (
@@ -182,7 +191,7 @@ export default function ToolsPage() {
       )}
 
       {tab === "冲稳保梯度自查" && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
+        <div className="card mt-6 p-7">
           <h2 className="font-bold mb-1">梯度健康自查</h2>
           <p className="text-sm text-ink/50 mb-4">逐条自问。少于 5 条勾选 = 你的志愿表梯度可能有问题。</p>
           <div className="space-y-3">
@@ -206,7 +215,7 @@ export default function ToolsPage() {
       )}
 
       {tab === "防退档终检清单" && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
+        <div className="card mt-6 p-7">
           <h2 className="font-bold mb-1">提交前最后一道闸</h2>
           <p className="text-sm text-ink/50 mb-4">退档=本批次直接出局。6 条全勾才允许自己点提交。</p>
           <div className="space-y-3">
@@ -229,7 +238,7 @@ export default function ToolsPage() {
       )}
 
       {tab === "我的志愿清单" && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
+        <div className="card mt-6 p-7">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <h2 className="font-bold">志愿表草稿（自动保存在本机）</h2>
@@ -257,7 +266,7 @@ export default function ToolsPage() {
             onClick={() =>
               setWishes((w) => [...w, { id: Date.now(), school: "", group: "", tier: "稳", note: "" }])
             }
-            className="mt-4 text-sm bg-gold text-ink px-4 py-2 rounded-full font-medium hover:bg-gold-light transition-colors"
+            className="btn-gold mt-4 text-sm text-ink px-5 py-2.5 rounded-full font-medium"
           >
             + 添加一个志愿
           </button>
@@ -269,26 +278,26 @@ export default function ToolsPage() {
               </p>
             )}
             {wishes.map((w, i) => (
-              <div key={w.id} className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-paper">
+              <div key={w.id} className="flex flex-wrap items-center gap-2 p-3.5 rounded-xl bg-paper-dark/50 border border-ink/5">
                 <span className="text-xs text-ink/40 w-6 text-center">{i + 1}</span>
                 <input
                   value={w.school}
                   onChange={(e) => setWishes((a) => a.map((x) => (x.id === w.id ? { ...x, school: e.target.value } : x)))}
                   placeholder="院校名称"
-                  className="flex-1 min-w-36 bg-white border border-black/10 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gold"
+                  className="field flex-1 min-w-36 rounded-lg px-3 py-1.5 text-sm"
                 />
                 <input
                   value={w.group}
                   onChange={(e) => setWishes((a) => a.map((x) => (x.id === w.id ? { ...x, group: e.target.value } : x)))}
                   placeholder="专业组/代码"
-                  className="w-32 bg-white border border-black/10 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gold"
+                  className="field w-32 rounded-lg px-3 py-1.5 text-sm"
                 />
                 <select
                   value={w.tier}
                   onChange={(e) =>
                     setWishes((a) => a.map((x) => (x.id === w.id ? { ...x, tier: e.target.value as Wish["tier"] } : x)))
                   }
-                  className="bg-white border border-black/10 rounded-lg px-2 py-1.5 text-sm outline-none focus:border-gold"
+                  className="field rounded-lg px-2 py-1.5 text-sm"
                 >
                   <option value="冲">冲</option>
                   <option value="稳">稳</option>
@@ -298,7 +307,7 @@ export default function ToolsPage() {
                   value={w.note}
                   onChange={(e) => setWishes((a) => a.map((x) => (x.id === w.id ? { ...x, note: e.target.value } : x)))}
                   placeholder="备注（可接受的专业组？）"
-                  className="flex-1 min-w-40 bg-white border border-black/10 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-gold"
+                  className="field flex-1 min-w-40 rounded-lg px-3 py-1.5 text-sm"
                 />
                 <button
                   onClick={() => setWishes((a) => a.filter((x) => x.id !== w.id))}
@@ -317,7 +326,7 @@ export default function ToolsPage() {
       )}
 
       {tab === "专业二选一矩阵" && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
+        <div className="card mt-6 p-7">
           <h2 className="font-bold mb-1">纠结终结器</h2>
           <p className="text-sm text-ink/50 mb-4">先定权重（合计100），再给两个选项在三个维度打分（1-5），分数不代表对错，代表你认真想过。</p>
           <div className="space-y-4">

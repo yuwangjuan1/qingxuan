@@ -6,123 +6,205 @@ const modules = [
     href: "/schools",
     title: "学校介绍",
     desc: "34 所院校结构化卡片：学科实力、转专业政策、报考避坑点，支持搜索筛选。",
-    icon: "学校",
+    icon: "校",
+    accent: "from-gold/15 to-gold/5 text-gold",
   },
   {
     href: "/majors",
     title: "专业定位",
     desc: "24 个专业拆名字背后的真相：名称陷阱排查、四出口地图、适不适合你来判断。",
-    icon: "专业",
+    icon: "专",
+    accent: "from-jade/15 to-jade/5 text-jade",
   },
   {
     href: "/tools",
     title: "择校工具",
     desc: "位次换算、冲稳保梯度自查、防退档终检清单、志愿清单与决策矩阵。",
-    icon: "工具",
+    icon: "具",
+    accent: "from-ink/10 to-ink/5 text-ink",
   },
   {
     href: "/guide",
     title: "填报指南",
     desc: "名词词典、八大经典坑位、填报日历与高频问答，一站式补齐规则知识。",
-    icon: "指南",
+    icon: "南",
+    accent: "from-gold/15 to-gold/5 text-gold",
   },
   {
     href: "/insights",
     title: "竞争与就业",
     desc: "12 条行业红绿灯：竞争态势与就业形势的定性分析，来源公开可查。",
-    icon: "洞察",
+    icon: "势",
+    accent: "from-jade/15 to-jade/5 text-jade",
   },
+];
+
+const stats = [
+  { num: "34", label: "所院校卡" },
+  { num: "24", label: "个专业祛魅" },
+  { num: "12", label: "条行业红绿灯" },
+  { num: "5", label: "个决策工具" },
+  { num: "3", label: "位 AI 顾问" },
 ];
 
 export default function Home() {
   return (
     <div>
-      <section className="bg-ink text-paper">
-        <div className="max-w-6xl mx-auto px-4 py-20 md:py-28">
-          <p className="text-gold text-sm tracking-widest mb-4">高考志愿决策平台</p>
-          <h1 className="text-3xl md:text-5xl font-bold leading-snug">
+      {/* Hero */}
+      <section className="hero-dark text-paper">
+        <div className="relative max-w-6xl mx-auto px-4 py-24 md:py-32">
+          <p className="inline-flex items-center gap-2 text-gold-light text-xs tracking-[0.3em] mb-6 border border-gold/30 bg-gold/10 rounded-full px-4 py-1.5">
+            高考志愿决策平台
+          </p>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug max-w-3xl">
             大厂告诉你能上哪些学校，
             <br />
-            我们帮你想清楚<span className="text-gold">该上哪个</span>。
+            我们帮你想清楚
+            <span className="relative inline-block text-gold-light">
+              该上哪个
+              <span className="absolute left-0 -bottom-1 w-full h-1 bg-gradient-to-r from-gold to-transparent rounded-full" />
+            </span>
+            。
           </h1>
-          <p className="mt-6 text-paper/70 max-w-2xl leading-relaxed">
+          <p className="mt-7 text-paper/60 max-w-2xl leading-loose text-base md:text-lg">
             不预测分数线，不承诺录取结果。青选提供择校方法、专业祛魅与家庭调解，
             配三位 AI 顾问，陪你把志愿表从吵成一团填到全票通过。
           </p>
-          <div className="mt-8 flex gap-4 flex-wrap">
+          <div className="mt-10 flex gap-4 flex-wrap">
             <Link
               href="/chat"
-              className="bg-gold text-ink px-6 py-3 rounded-full font-medium hover:bg-gold-light transition-colors"
+              className="btn-gold text-ink px-8 py-3.5 rounded-full font-medium"
             >
-              开始咨询顾问
+              开始咨询顾问 →
             </Link>
             <Link
               href="/tools"
-              className="border border-paper/40 px-6 py-3 rounded-full hover:border-gold hover:text-gold-light transition-colors"
+              className="btn-ghost px-8 py-3.5 rounded-full text-paper/90"
             >
               先用免费工具
             </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="text-2xl font-bold mb-8">三位顾问，各管一段</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {ADVISORS.map((a) => (
-            <Link
-              key={a.id}
-              href={"/chat?advisor=" + a.id}
-              className="group bg-white rounded-2xl p-6 border border-black/5 hover:shadow-lg hover:-translate-y-0.5 transition-all"
-            >
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white text-lg font-bold mb-4"
-                style={{ background: a.color }}
-              >
-                {a.name[1]}
+          <div className="mt-14 flex gap-x-10 gap-y-4 flex-wrap">
+            {stats.map((s) => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <span className="text-3xl font-bold bg-gradient-to-br from-gold-light to-gold bg-clip-text text-transparent">
+                  {s.num}
+                </span>
+                <span className="text-sm text-paper/50">{s.label}</span>
               </div>
-              <h3 className="font-bold text-lg">
-                {a.name} · {a.title}
-              </h3>
-              <p className="mt-2 text-sm text-ink/60 leading-relaxed">{a.intro}</p>
-              <p className="mt-4 text-sm text-jade group-hover:underline">找 TA 聊聊</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-white border-y border-black/5">
-        <div className="max-w-6xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold mb-8">四大模块</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {modules.map((m) => (
-              <Link
-                key={m.href}
-                href={m.href}
-                className="flex gap-4 p-6 rounded-2xl bg-paper hover:bg-gold/10 transition-colors"
-              >
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-ink text-gold flex items-center justify-center text-sm font-bold">
-                  {m.icon}
-                </div>
-                <div>
-                  <h3 className="font-bold">{m.title}</h3>
-                  <p className="mt-1 text-sm text-ink/60 leading-relaxed">{m.desc}</p>
-                </div>
-              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="rounded-2xl bg-ink text-paper p-8 md:p-12">
-          <h2 className="text-xl md:text-2xl font-bold">为什么我们不给你「智能推荐」？</h2>
-          <p className="mt-4 text-paper/70 leading-relaxed max-w-3xl">
-            免费工具已经能把你的分数变成一百个志愿，但同一分数在不同平台得到的方案重合率不到三成。
-            推荐越多，家庭越乱。青选不加入推荐竞赛：
-            我们教你判断的方法、核查的清单和一家人达成一致的路子。
-            决定是你自己做的，所以不后悔也是你自己的。
-          </p>
+      {/* 顾问 */}
+      <section className="max-w-6xl mx-auto px-4 py-20">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+          <div>
+            <span className="section-line" />
+            <h2 className="text-3xl font-bold mt-3">三位顾问，各管一段</h2>
+            <p className="mt-2 text-ink/50 text-sm">策略、专业、家庭调解，分工明确，不互相越界。</p>
+          </div>
+          <Link href="/chat" className="text-sm text-jade hover:text-gold transition-colors">
+            直接开聊 →
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {ADVISORS.map((a) => (
+            <Link
+              key={a.id}
+              href={"/chat?advisor=" + a.id}
+              className="card card-hover group p-7 relative overflow-hidden"
+            >
+              <div
+                className="absolute -right-8 -top-8 w-32 h-32 rounded-full opacity-[0.07] group-hover:opacity-[0.14] transition-opacity"
+                style={{ background: a.color }}
+              />
+              <div
+                className="w-13 h-13 rounded-2xl flex items-center justify-center text-white text-xl font-bold shadow-lg mb-5 group-hover:scale-105 transition-transform"
+                style={{ background: a.color }}
+              >
+                {a.name[1]}
+              </div>
+              <h3 className="font-bold text-lg">
+                {a.name}
+                <span className="text-ink/40 text-sm font-normal ml-2">{a.title}</span>
+              </h3>
+              <p className="mt-2.5 text-sm text-ink/60 leading-relaxed">{a.intro}</p>
+              <p className="mt-5 text-sm font-medium group-hover:translate-x-1 transition-transform inline-flex items-center gap-1" style={{ color: a.color }}>
+                找 TA 聊聊 <span>→</span>
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 模块 */}
+      <section className="bg-white border-y border-ink/5">
+        <div className="max-w-6xl mx-auto px-4 py-20">
+          <div className="mb-10">
+            <span className="section-line" />
+            <h2 className="text-3xl font-bold mt-3">五大模块</h2>
+            <p className="mt-2 text-ink/50 text-sm">从查资料到做决定，填报全流程的工具箱。</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {modules.map((m) => (
+              <Link
+                key={m.href}
+                href={m.href}
+                className="card card-hover group p-6 flex gap-5"
+              >
+                <div
+                  className={
+                    "shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center text-lg font-bold border border-ink/5 " +
+                    m.accent
+                  }
+                >
+                  {m.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold group-hover:text-gold transition-colors">{m.title}</h3>
+                  <p className="mt-1.5 text-sm text-ink/55 leading-relaxed">{m.desc}</p>
+                </div>
+              </Link>
+            ))}
+            {/* 理念卡占位，撑满网格 */}
+            <div className="rounded-2xl p-6 flex flex-col justify-between bg-gradient-to-br from-ink to-ink-soft text-paper">
+              <p className="text-sm text-gold-light font-medium tracking-widest">我们的立场</p>
+              <p className="text-lg font-bold leading-relaxed mt-3">
+                不做一键推荐，
+                <br />
+                只帮你把决定做对。
+              </p>
+              <Link href="/guide" className="mt-4 text-xs text-paper/60 hover:text-gold-light transition-colors">
+                先去补齐规则知识 →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 理念 */}
+      <section className="max-w-6xl mx-auto px-4 py-20">
+        <div className="hero-dark rounded-3xl text-paper p-10 md:p-16 relative">
+          <div className="relative max-w-3xl">
+            <span className="section-line" />
+            <h2 className="text-2xl md:text-3xl font-bold mt-4 leading-snug">
+              为什么我们不给你「智能推荐」？
+            </h2>
+            <p className="mt-5 text-paper/60 leading-loose">
+              免费工具已经能把你的分数变成一百个志愿，但同一分数在不同平台得到的方案重合率不到三成。
+              推荐越多，家庭越乱。青选不加入推荐竞赛：我们教你判断的方法、核查的清单和一家人达成一致的路子。
+              决定是你自己做的，所以不后悔也是你自己的。
+            </p>
+            <div className="mt-8 flex gap-3 flex-wrap text-xs">
+              {["位次思维", "梯度结构", "防退档清单", "家庭共识"].map((t) => (
+                <span key={t} className="border border-white/15 bg-white/5 rounded-full px-4 py-1.5 text-paper/70">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </div>
