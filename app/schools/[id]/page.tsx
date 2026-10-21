@@ -1,14 +1,20 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SCHOOLS } from "@/lib/data/schools";
+import { ALL_SCHOOLS } from "@/lib/data/schools";
 
 export function generateStaticParams() {
-  return SCHOOLS.map((s) => ({ id: s.id }));
+  return ALL_SCHOOLS.map((s) => ({ id: s.id }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const s = ALL_SCHOOLS.find((x) => x.id === id);
+  return { title: s ? s.name + "怎么样 · 报考要点" : "学校介绍" };
 }
 
 export default async function SchoolDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const s = SCHOOLS.find((x) => x.id === id);
+  const s = ALL_SCHOOLS.find((x) => x.id === id);
   if (!s) notFound();
 
   return (

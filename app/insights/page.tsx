@@ -26,7 +26,7 @@ export default function InsightsPage() {
             <ul className="mt-4 space-y-1.5">
               {it.points.map((p, i) => (
                 <li key={i} className="text-sm leading-relaxed flex gap-2">
-                  <span className="text-gold mt-0.5"></span>
+                  <span className="text-gold mt-0.5">•</span>
                   <span>{p}</span>
                 </li>
               ))}

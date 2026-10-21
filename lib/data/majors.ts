@@ -1,3 +1,5 @@
+import { MAJORS_EXTRA } from "./majors-extra";
+
 export type Major = {
   id: string;
   name: string;
@@ -167,7 +169,7 @@ export const MAJORS: Major[] = [
     exits: {
       job: "公立口腔科、民营连锁（通策等）、自开诊所通道清晰",
       grad: "硕士即可进入较好平台，长跑压力小于临床",
-      civil: "口轻专科医院、卫健系统",
+      civil: "口腔专科医院、卫健系统",
       other: "医美、正畸方向市场大",
     },
     fitFor: ["手部精细操作能力强", "想要职业自主权"],
@@ -206,3 +208,5 @@ export const MAJORS: Major[] = [
     warning: "普通院校金融本科去向以银行柜员与销售为主，行业降薪周期要想清楚。",
   },
 ];
+
+export const ALL_MAJORS: Major[] = [...MAJORS, ...MAJORS_EXTRA];

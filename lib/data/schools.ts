@@ -1,3 +1,5 @@
+import { SCHOOLS_EXTRA } from "./schools-extra";
+
 export type School = {
   id: string;
   name: string;
@@ -192,3 +194,5 @@ export const SCHOOLS: School[] = [
     watchOut: "非邮电特色专业（文科、经管）一般，别用校名光环套所有专业",
   },
 ];
+
+export const ALL_SCHOOLS: School[] = [...SCHOOLS, ...SCHOOLS_EXTRA];
