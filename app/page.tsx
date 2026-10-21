@@ -51,35 +51,35 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="hero-light">
-        <div className="relative max-w-6xl mx-auto px-4 py-24 md:py-32">
-          <p className="inline-flex items-center gap-2 text-gold-dark text-xs tracking-[0.3em] mb-6 border border-gold/30 bg-gold/10 rounded-full px-4 py-1.5">
+      <section className="hero-blue text-paper">
+        <div className="relative max-w-[1200px] mx-auto px-4 py-28 md:py-40">
+          <p className="inline-flex items-center gap-2 text-[#CFE3FF] text-xs tracking-[0.3em] mb-6 border border-white/25 bg-white/10 rounded-full px-4 py-1.5">
             高考志愿决策平台
           </p>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight md:leading-snug max-w-3xl">
             大厂告诉你能上哪些学校，
             <br />
             我们帮你想清楚
-            <span className="relative inline-block text-gold-dark">
+            <span className="relative inline-block text-gold-light">
               该上哪个
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-gradient-to-r from-gold to-transparent rounded-full" />
             </span>
             。
           </h1>
-          <p className="mt-7 text-ink/60 max-w-2xl leading-loose text-base md:text-lg">
+          <p className="mt-7 text-paper/75 max-w-2xl leading-loose text-base md:text-lg">
             不预测分数线，不承诺录取结果。青选提供择校方法、专业祛魅与家庭调解，
             配三位 AI 顾问，陪你把志愿表从吵成一团填到全票通过。
           </p>
           <div className="mt-10 flex gap-4 flex-wrap">
             <Link
               href="/chat"
-              className="btn-gold text-ink px-8 py-3.5 rounded-full font-medium"
+              className="bg-white text-[#123C7A] px-8 py-3.5 rounded-full font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
             >
               开始咨询顾问 →
             </Link>
             <Link
               href="/tools"
-              className="px-8 py-3.5 rounded-full border border-ink/15 bg-white/70 text-ink/70 hover:border-gold hover:text-gold-dark transition-colors"
+              className="px-8 py-3.5 rounded-full border border-white/40 text-white/90 hover:bg-white/10 hover:border-white transition-colors"
             >
               先用免费工具
             </Link>
@@ -87,10 +87,10 @@ export default function Home() {
           <div className="mt-14 flex gap-x-10 gap-y-4 flex-wrap">
             {stats.map((s) => (
               <div key={s.label} className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold bg-gradient-to-br from-gold-dark to-gold bg-clip-text text-transparent">
+                <span className="text-3xl font-bold text-white">
                   {s.num}
                 </span>
-                <span className="text-sm text-ink/50">{s.label}</span>
+                <span className="text-sm text-paper/60">{s.label}</span>
               </div>
             ))}
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* 顾问 */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
+      <section className="max-w-[1200px] mx-auto px-4 py-20">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
           <div>
             <span className="section-line" />
@@ -140,8 +140,8 @@ export default function Home() {
       </section>
 
       {/* 模块 */}
-      <section className="bg-white border-y border-ink/5">
-        <div className="max-w-6xl mx-auto px-4 py-20">
+      <section className="bg-blue-pale/60 border-y border-blue/10">
+        <div className="max-w-[1200px] mx-auto px-4 py-20">
           <div className="mb-10">
             <span className="section-line" />
             <h2 className="text-3xl font-bold mt-3">五大模块</h2>
@@ -169,7 +169,7 @@ export default function Home() {
               </Link>
             ))}
             {/* 理念卡占位，撑满网格 */}
-            <div className="rounded-2xl p-6 flex flex-col justify-between bg-gradient-to-br from-ink to-ink-soft text-paper">
+            <div className="rounded-2xl p-6 flex flex-col justify-between bg-gradient-to-br from-blue-deep to-blue text-paper">
               <p className="text-sm text-gold-light font-medium tracking-widest">我们的立场</p>
               <p className="text-lg font-bold leading-relaxed mt-3">
                 不做一键推荐，
@@ -185,8 +185,8 @@ export default function Home() {
       </section>
 
       {/* 理念 */}
-      <section className="max-w-6xl mx-auto px-4 py-20">
-        <div className="hero-dark rounded-3xl text-paper p-10 md:p-16 relative">
+      <section className="max-w-[1200px] mx-auto px-4 py-20">
+        <div className="hero-blue rounded-3xl text-paper p-10 md:p-16 relative">
           <div className="relative max-w-3xl">
             <span className="section-line" />
             <h2 className="text-2xl md:text-3xl font-bold mt-4 leading-snug">

@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  --color-blue: #1E56A0;
+  --color-blue-deep: #123C7A;
+  --color-blue-light: #4A7FD4;
+  --color-blue-pale: #EDF3FB;
   --color-gold: #C9A227;
   --color-gold-light: #F2D06B;
   --color-gold-dark: #9A7B1A;
@@ -8,10 +12,11 @@
   --color-ink-soft: #1C2E45;
   --color-jade: #2EA3A6;
   --color-jade-light: #5BC8CB;
-  --color-paper: #F7F5F0;
-  --color-paper-dark: #EFEBE2;
+  --color-paper: #F5F8FC;
+  --color-paper-dark: #E9EEF6;
   --shadow-card: 0 1px 2px rgba(14, 27, 44, 0.04), 0 4px 16px rgba(14, 27, 44, 0.06);
   --shadow-card-hover: 0 2px 4px rgba(14, 27, 44, 0.06), 0 12px 32px rgba(14, 27, 44, 0.12);
+  --shadow-blue: 0 4px 20px rgba(30, 86, 160, 0.35);
   --shadow-gold: 0 4px 20px rgba(201, 162, 39, 0.35);
 }
 
@@ -29,7 +34,7 @@ body {
 }
 
 ::selection {
-  background: rgba(201, 162, 39, 0.25);
+  background: rgba(30, 86, 160, 0.18);
   color: var(--color-ink);
 }
 
@@ -42,44 +47,33 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(14, 27, 44, 0.15);
+  background: rgba(30, 86, 160, 0.2);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(14, 27, 44, 0.3);
+  background: rgba(30, 86, 160, 0.4);
 }
 
 /* 统一聚焦态 */
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* 鎏金主按钮：渐变+光晕 */
-.btn-gold {
-  background: linear-gradient(135deg, #d9b23a 0%, #c9a227 45%, #b08d1e 100%);
-  box-shadow: var(--shadow-gold);
+/* 学院蓝主按钮：渐变+光晕 */
+.btn-blue {
+  background: linear-gradient(135deg, #2E66B8 0%, #1E56A0 45%, #174A87 100%);
+  box-shadow: var(--shadow-blue);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
-.btn-gold:hover {
-  filter: brightness(1.06);
+.btn-blue:hover {
+  filter: brightness(1.08);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(201, 162, 39, 0.45);
+  box-shadow: 0 6px 24px rgba(30, 86, 160, 0.45);
 }
-.btn-gold:active {
+.btn-blue:active {
   transform: translateY(0);
-}
-
-/* 幽灵按钮 */
-.btn-ghost {
-  border: 1px solid rgba(247, 245, 240, 0.35);
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-}
-.btn-ghost:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold-light);
-  background: rgba(201, 162, 39, 0.08);
 }
 
 /* 白卡：统一悬浮语言 */
@@ -93,56 +87,25 @@ body {
 .card-hover:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
-  border-color: rgba(201, 162, 39, 0.35);
+  border-color: rgba(30, 86, 160, 0.3);
 }
 
-/* 页面横幅：浅色光晕卡 */
-.page-banner {
+/* 首页全宽深蓝 banner：冰蓝/鎏金双光晕 + 渐隐细网格 */
+.hero-blue {
   background:
-    radial-gradient(ellipse 60% 90% at 15% 0%, rgba(201, 162, 39, 0.10), transparent 55%),
-    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(46, 163, 166, 0.08), transparent 55%),
-    #FFFFFF;
-  border: 1px solid rgba(14, 27, 44, 0.06);
-  box-shadow: var(--shadow-card);
-}
-
-/* hero 浅底：金色/青碧光晕 + 渐隐细网格 */
-.hero-light {
-  background:
-    radial-gradient(ellipse 55% 60% at 12% -10%, rgba(201, 162, 39, 0.14), transparent 60%),
-    radial-gradient(ellipse 50% 55% at 88% 0%, rgba(46, 163, 166, 0.10), transparent 60%),
-    linear-gradient(180deg, #FFFFFF 0%, #F7F5F0 100%);
+    radial-gradient(ellipse 55% 60% at 12% -10%, rgba(140, 190, 255, 0.22), transparent 60%),
+    radial-gradient(ellipse 50% 55% at 88% 0%, rgba(201, 162, 39, 0.16), transparent 60%),
+    linear-gradient(180deg, #0F2B57 0%, #1E56A0 100%);
   position: relative;
   overflow: hidden;
 }
-.hero-light::before {
+.hero-blue::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(14, 27, 44, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 27, 44, 0.028) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%);
-  pointer-events: none;
-}
-
-/* 深色点缀卡（首页理念/详情页引流条/页脚锚定用） */
-.hero-dark {
-  background:
-    radial-gradient(ellipse 60% 50% at 15% 0%, rgba(201, 162, 39, 0.18), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 85% 10%, rgba(46, 163, 166, 0.12), transparent 60%),
-    linear-gradient(180deg, #0E1B2C 0%, #13233A 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hero-dark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(247, 245, 240, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247, 245, 240, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(247, 245, 240, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 245, 240, 0.04) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%);
   pointer-events: none;
@@ -154,7 +117,17 @@ body {
   width: 2.5rem;
   height: 3px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  background: linear-gradient(90deg, var(--color-blue), var(--color-blue-light));
+}
+
+/* 内页横幅：白底蓝晕光卡 */
+.page-banner {
+  background:
+    radial-gradient(ellipse 60% 90% at 12% 0%, rgba(30, 86, 160, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(74, 127, 212, 0.06), transparent 55%),
+    #FFFFFF;
+  border: 1px solid rgba(30, 86, 160, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 /* 输入框统一 */
@@ -164,7 +137,7 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .field:focus {
-  border-color: var(--color-gold);
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(30, 86, 160, 0.12);
   outline: none;
 }
