@@ -65,7 +65,13 @@ function ChatInner() {
       });
       if (!res.ok || !res.body) {
         const err = await res.json().catch(() => ({ error: "服务暂不可用" }));
-        setMessages((m) => [...m, { role: "assistant", content: "出错了：" + (err.error || res.status) }]);
+        const detail = (err as { error?: string; detail?: string; status?: number });
+        const msg =
+          "出错了：" + (detail.error || res.status) +
+          (detail.detail ? "\n[详情] " + String(detail.detail).slice(0, 300) : "") +
+          (detail.status === 401 ? "\n（疑似 API Key 无效）" : "") +
+          (detail.status === 404 ? "\n（疑似 BASE_URL 或模型名不对）" : "");
+        setMessages((m) => [...m, { role: "assistant", content: msg }]);
         setBusy(false);
         return;
       }
