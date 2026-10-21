@@ -45,7 +45,7 @@ export default function MajorsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="搜索专业名或关键词，如「计算机」「数学」「考公」"
-          className="field w-full rounded-full px-5 py-3.5 text-sm"
+          className="field w-full rounded-full px-5 py-3.5 text-base"
         />
         <div className="flex flex-wrap items-center gap-2">
           {cats.map((c) => (
@@ -53,7 +53,7 @@ export default function MajorsPage() {
               key={c}
               onClick={() => setCat(c)}
               className={
-                "px-4 py-1.5 rounded-full text-xs transition-all " +
+                "px-4.5 py-2 rounded-full text-sm transition-all " +
                 (cat === c
                   ? "bg-blue text-white font-medium shadow-card"
                   : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
@@ -66,7 +66,7 @@ export default function MajorsPage() {
           <button
             onClick={() => setOnlyTrap(!onlyTrap)}
             className={
-              "px-4 py-1.5 rounded-full text-xs transition-all " +
+              "px-4.5 py-2 rounded-full text-sm transition-all " +
               (onlyTrap
                 ? "bg-red-500 text-white font-medium shadow-card"
                 : "bg-white border border-ink/10 text-ink/60 hover:border-red-400 hover:text-red-500")

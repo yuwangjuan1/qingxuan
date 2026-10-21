@@ -110,7 +110,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mt-3">三位顾问，各管一段</h2>
             <p className="mt-2 text-ink/50 text-sm">策略、专业、家庭调解，分工明确，不互相越界。</p>
           </div>
-          <Link href="/chat" className="text-sm text-jade hover:text-gold transition-colors">
+          <Link href="/chat" className="text-sm text-blue hover:text-blue-deep transition-colors">
             直接开聊 →
           </Link>
         </div>
@@ -168,20 +168,23 @@ export default function Home() {
                   {m.icon}
                 </div>
                 <div>
-                  <h3 className="font-bold group-hover:text-gold transition-colors">{m.title}</h3>
+                  <h3 className="font-bold group-hover:text-blue transition-colors">{m.title}</h3>
                   <p className="mt-1.5 text-sm text-ink/55 leading-relaxed">{m.desc}</p>
                 </div>
               </Link>
             ))}
             {/* 理念卡占位，撑满网格 */}
-            <div className="rounded-2xl p-6 flex flex-col justify-between bg-gradient-to-br from-blue-deep to-blue text-paper">
+            <div className="rounded-2xl p-6 flex flex-col justify-between overflow-hidden relative bg-gradient-to-br from-blue-deep to-blue text-paper">
+              <div className="banner-orb banner-orb-b opacity-30" />
+              <div className="relative">
               <p className="text-sm text-gold-light font-medium tracking-widest">我们的立场</p>
               <p className="text-lg font-bold leading-relaxed mt-3">
                 不做一键推荐，
                 <br />
                 只帮你把决定做对。
               </p>
-              <Link href="/guide" className="mt-4 text-xs text-paper/60 hover:text-gold-light transition-colors">
+              </div>
+              <Link href="/guide" className="relative mt-4 text-xs text-paper/70 hover:text-gold-light transition-colors">
                 先去补齐规则知识 →
               </Link>
             </div>
@@ -191,7 +194,10 @@ export default function Home() {
 
       {/* 理念 */}
       <section className="max-w-[1200px] mx-auto px-4 py-20">
-        <div className="hero-blue rounded-3xl text-paper p-10 md:p-16 relative">
+        <div className="banner-deep theme-blue rounded-3xl text-paper p-10 md:p-16 relative overflow-hidden">
+          <div className="banner-orb banner-orb-a" />
+          <div className="banner-orb banner-orb-b" />
+          <div className="banner-grid" />
           <div className="relative max-w-3xl">
             <span className="section-line" />
             <h2 className="text-2xl md:text-3xl font-bold mt-4 leading-snug">

@@ -46,7 +46,7 @@ export default function SchoolsPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="搜索校名、城市或关键词，如「电子」「成都」「两电一邮」"
-          className="field w-full rounded-full px-5 py-3.5 text-sm"
+          className="field w-full rounded-full px-5 py-3.5 text-base"
         />
         <div className="flex flex-wrap gap-2">
           {TYPES.map((t) => (
@@ -54,7 +54,7 @@ export default function SchoolsPage() {
               key={t}
               onClick={() => setType(t)}
               className={
-                "px-4 py-1.5 rounded-full text-xs transition-all " +
+                "px-4.5 py-2 rounded-full text-sm transition-all " +
                 (type === t
                   ? "bg-blue text-white font-medium shadow-card"
                   : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
@@ -69,7 +69,7 @@ export default function SchoolsPage() {
               key={l}
               onClick={() => setLevel(l)}
               className={
-                "px-4 py-1.5 rounded-full text-xs transition-all " +
+                "px-4.5 py-2 rounded-full text-sm transition-all " +
                 (level === l
                   ? "bg-blue text-white font-medium shadow-card"
                   : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
