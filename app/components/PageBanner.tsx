@@ -11,11 +11,12 @@ type Props = {
   title?: string;
   desc?: string;
   stats?: { num: string; label: string }[];
+  theme?: "blue" | "orange" | "emerald" | "violet" | "rose";
 };
 
 const FALLBACK: Slide[] = [];
 
-export default function PageBanner({ slides = FALLBACK, tag, title, desc, stats }: Props) {
+export default function PageBanner({ slides = FALLBACK, tag, title, desc, stats, theme = "blue" }: Props) {
   const [idx, setIdx] = useState(0);
   const list = slides.length > 0 ? slides : [{ tag: tag ?? "", title, desc }];
   const cur = list[Math.min(idx, list.length - 1)];
@@ -27,7 +28,7 @@ export default function PageBanner({ slides = FALLBACK, tag, title, desc, stats 
   }, [list.length]);
 
   return (
-    <section className="banner-deep text-white overflow-hidden">
+    <section className={"banner-deep text-white overflow-hidden theme-" + theme}>
       {/* 动效层 */}
       <div className="absolute inset-0 pointer-events-none">
         {/* 光斑 */}
