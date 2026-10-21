@@ -38,17 +38,24 @@ function ChatInner() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const boxRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   const advisor = ADVISORS.find((a) => a.id === advisorId)!;
 
   useEffect(() => {
+    abortRef.current?.abort();
     setMessages([]);
     setInput("");
+    setBusy(false);
   }, [advisorId]);
 
   useEffect(() => {
-    boxRef.current?.scrollTo({ top: boxRef.current.scrollHeight });
+    boxRef.current?.scrollTo({ top: boxRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    return () => abortRef.current?.abort();
+  }, []);
 
   async function send() {
     const text = input.trim();
@@ -57,15 +64,18 @@ function ChatInner() {
     setMessages(next);
     setInput("");
     setBusy(true);
+    const ac = new AbortController();
+    abortRef.current = ac;
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ advisorId, messages: next }),
+        signal: ac.signal,
       });
       if (!res.ok || !res.body) {
         const err = await res.json().catch(() => ({ error: "服务暂不可用" }));
-        const detail = (err as { error?: string; detail?: string; status?: number });
+        const detail = err as { error?: string; detail?: string; status?: number };
         const msg =
           "出错了：" + (detail.error || res.status) +
           (detail.detail ? "\n[详情] " + String(detail.detail).slice(0, 300) : "") +
@@ -77,12 +87,12 @@ function ChatInner() {
       }
       setMessages((m) => [...m, { role: "assistant", content: "" }]);
       const reader = res.body.getReader();
-      const decoder = new TextDecoder();
+      const decoder = TextDecoder ? new TextDecoder() : null;
       let buf = "";
       for (;;) {
         const { done, value } = await reader.read();
         if (done) break;
-        buf += decoder.decode(value, { stream: true });
+        buf += decoder!.decode(value, { stream: true });
         const lines = buf.split("\n");
         buf = lines.pop() || "";
         for (const line of lines) {
@@ -104,38 +114,81 @@ function ChatInner() {
           } catch {}
         }
       }
-    } catch {
-      setMessages((m) => [...m, { role: "assistant", content: "网络异常，请稍后重试。" }]);
+    } catch (e) {
+      if ((e as Error).name !== "AbortError") {
+        setMessages((m) => [...m, { role: "assistant", content: "网络异常，请稍后重试。" }]);
+      }
     }
     setBusy(false);
   }
+
+  function stop() {
+    abortRef.current?.abort();
+    setBusy(false);
+  }
+
+  function retry() {
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    if (lastUser) {
+      setMessages((m) => {
+        const idx = m.map((x) => x.role).lastIndexOf("user");
+        return m.slice(0, idx);
+      });
+      setInput(lastUser.content);
+      setTimeout(send, 50);
+      setTimeout(() => setInput(""), 100);
+    }
+  }
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 h-[calc(100vh-3.5rem)] flex flex-col">
-      <div className="flex gap-2 overflow-x-auto pb-3">
-        {ADVISORS.map((a) => (
-          <button
-            key={a.id}
-            onClick={() => setAdvisorId(a.id)}
-            className={"shrink-0 px-4 py-2 rounded-full text-sm transition-colors " + (advisorId === a.id ? "text-white font-medium" : "bg-white border border-black/10 hover:border-gold")}
-            style={advisorId === a.id ? { background: a.color } : undefined}
-          >
-            {a.name} · {a.title}
-          </button>
-        ))}
+    <div className="max-w-4xl mx-auto px-4 pt-6 pb-4 h-[calc(100vh-76px)] flex flex-col">
+      {/* 顾问切换 */}
+      <div className="flex gap-2.5 overflow-x-auto pb-3">
+        {ADVISORS.map((a) => {
+          const active = advisorId === a.id;
+          return (
+            <button
+              key={a.id}
+              onClick={() => setAdvisorId(a.id)}
+              aria-pressed={active}
+              className={
+                "shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all " +
+                (active
+                  ? "text-white shadow-md"
+                  : "bg-white border border-ink/10 text-ink/65 hover:border-ink/30 hover:text-ink")
+              }
+              style={active ? { background: a.color } : undefined}
+            >
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: active ? "rgba(255,255,255,0.9)" : a.color }}
+              />
+              {a.name}
+              <span className={active ? "text-white/80" : "text-ink/40"}>· {a.title}</span>
+            </button>
+          );
+        })}
       </div>
 
-      <p className="text-xs text-ink/50 bg-white border border-black/5 rounded-xl px-4 py-2 mb-3">{advisor.intro}</p>
+      {/* 顾问介绍条 */}
+      <div
+        className="rounded-xl px-4 py-2.5 mb-3 text-sm text-ink/75 border-l-4 flex items-center gap-3"
+        style={{ background: advisor.color + "10", borderColor: advisor.color }}
+      >
+        <span className="text-ink/60 leading-relaxed flex-1">{advisor.intro}</span>
+      </div>
 
+      {/* 消息区 */}
       <div ref={boxRef} className="card flex-1 overflow-y-auto p-5 space-y-4">
         {messages.length === 0 && (
-          <div className="text-sm text-ink/50 leading-relaxed">
+          <div className="text-sm text-ink/55 leading-relaxed">
             <p className="whitespace-pre-wrap">{OPENERS[advisorId]}</p>
             <div className="mt-4 flex flex-col gap-2">
               {QUICKS[advisorId].map((q) => (
                 <button
                   key={q}
                   onClick={() => setInput(q)}
-                  className="text-left text-sm text-ink/70 bg-paper border border-black/5 rounded-xl px-4 py-2.5 hover:border-gold hover:text-ink transition-colors"
+                  className="text-left text-sm text-ink/70 bg-paper border border-ink/8 rounded-xl px-4 py-2.5 hover:border-blue/50 hover:text-blue transition-colors"
                 >
                   {q}
                 </button>
@@ -144,37 +197,80 @@ function ChatInner() {
           </div>
         )}
         {messages.map((m, i) => (
-          <div key={i} className={"flex " + (m.role === "user" ? "justify-end" : "justify-start")}>
+          <div key={i} className={"flex gap-2.5 " + (m.role === "user" ? "justify-end" : "justify-start")}>
+            {m.role === "assistant" && (
+              <div
+                className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-sm"
+                style={{ background: advisor.color }}
+              >
+                {advisor.name[1]}
+              </div>
+            )}
             <div
-              className={"max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap " + (m.role === "user" ? "bg-blue text-white rounded-br-sm" : "bg-paper rounded-bl-sm")}
+              className={
+                "max-w-[82%] rounded-2xl px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap " +
+                (m.role === "user" ? "bg-blue text-white rounded-br-sm" : "bg-paper border border-ink/5 rounded-bl-sm")
+              }
             >
               {m.content || "..."}
             </div>
           </div>
         ))}
         {busy && messages[messages.length - 1]?.role === "assistant" && !messages[messages.length - 1]?.content && (
-          <div className="text-xs text-ink/40">正在思考...</div>
+          <div className="flex gap-2.5 items-center">
+            <div
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-sm"
+              style={{ background: advisor.color }}
+            >
+              {advisor.name[1]}
+            </div>
+            <div className="flex gap-1.5 px-4 py-3 bg-paper border border-ink/5 rounded-2xl rounded-bl-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-ink/30 animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-ink/30 animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-ink/30 animate-bounce" style={{ animationDelay: "300ms" }} />
+            </div>
+          </div>
         )}
       </div>
 
+      {/* 输入区 */}
       <div className="mt-3 flex gap-2">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
-          placeholder="输入你的情况或问题，Enter 发送"
-          className="field flex-1 rounded-full px-5 py-3 text-sm"
+          placeholder={"向" + advisor.name + "提问，Enter 发送"}
+          className="field flex-1 rounded-full px-5 py-3 text-base"
           disabled={busy}
         />
-        <button
-          onClick={send}
-          disabled={busy || !input.trim()}
-          className="bg-gold text-ink px-6 rounded-full text-sm font-medium disabled:opacity-40 hover:bg-gold-light transition-colors"
-        >
-          发送
-        </button>
+        {busy ? (
+          <button
+            onClick={stop}
+            className="border border-ink/15 text-ink/70 px-6 rounded-full text-sm font-medium hover:border-red-300 hover:text-red-500 transition-colors"
+          >
+            停止
+          </button>
+        ) : (
+          <>
+            {messages.some((m) => m.role === "user") && (
+              <button
+                onClick={retry}
+                className="border border-ink/15 text-ink/60 px-5 rounded-full text-sm hover:border-blue/50 hover:text-blue transition-colors"
+              >
+                重问
+              </button>
+            )}
+            <button
+              onClick={send}
+              disabled={!input.trim()}
+              className="btn-blue text-white px-7 rounded-full text-sm font-medium disabled:opacity-40"
+            >
+              发送
+            </button>
+          </>
+        )}
       </div>
-      <p className="mt-2 text-[11px] text-ink/40 text-center">
+      <p className="mt-2 text-xs text-ink/40 text-center">
         顾问只提供决策方法参考，不提供分数线与录取预测；最终以各省考试院与院校官方信息为准。
       </p>
     </div>
