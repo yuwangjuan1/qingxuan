@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import PageBanner from "@/app/components/PageBanner";
+import NextStep from "@/app/components/NextStep";
 
 const TABS = [
   "冲稳保定位计算器",
@@ -389,6 +390,15 @@ export default function ToolsPage() {
           </div>
         </div>
       )}
+
+        <NextStep
+          title="数字有了，规则再补齐"
+          desc="投档规则、专业组调剂、体检限报——这些是最容易在最后一步翻车的地方。指南里按名词、坑位、时间线分类整理好了。"
+          href="/guide"
+          label="去补规则知识"
+          altHref="/chat?advisor=qingxing"
+          altLabel="直接问青杏"
+        />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import PageBanner from "@/app/components/PageBanner";
+import NextStep from "@/app/components/NextStep";
 import { GLOSSARY, PITFALLS, CALENDAR, FAQ } from "@/lib/data/knowledge";
 
 const TABS = ["名词词典", "避坑指南", "填报日历", "高频问答"] as const;

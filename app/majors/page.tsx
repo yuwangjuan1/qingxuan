@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ALL_MAJORS, TRAP_LABEL } from "@/lib/data/majors";
 import PageBanner from "@/app/components/PageBanner";
+import NextStep from "@/app/components/NextStep";
 
 export default function MajorsPage() {
   const [query, setQuery] = useState("");
@@ -103,6 +104,15 @@ export default function MajorsPage() {
           ))}
         </div>
       )}
+
+        <NextStep
+          title="专业有方向了，先算算够不够得着"
+          desc="把分数换成位次，再看冲稳保三档落在哪。工具在本地计算，不收集任何信息，算完心里就有区间了。"
+          href="/tools"
+          label="去算我的位次"
+          altHref="/chat?advisor=qingxing"
+          altLabel="找青杏聊策略"
+        />
       </div>
     </div>
   );
