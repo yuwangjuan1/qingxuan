@@ -28,7 +28,7 @@ export default function MajorsPage() {
   const trapCount = ALL_MAJORS.filter((m) => m.isTrap).length;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-14">
+    <div className="max-w-[1200px] mx-auto px-4 py-14">
       <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">专业定位</h1>
         <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
@@ -51,8 +51,8 @@ export default function MajorsPage() {
               className={
                 "px-4 py-1.5 rounded-full text-xs transition-all " +
                 (cat === c
-                  ? "bg-ink text-gold font-medium shadow-card"
-                  : "bg-white border border-ink/10 text-ink/60 hover:border-gold hover:text-gold")
+                  ? "bg-blue text-white font-medium shadow-card"
+                  : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
               }
             >
               {c}
@@ -84,7 +84,7 @@ export default function MajorsPage() {
               className="card card-hover group p-6 flex flex-col"
             >
               <div className="flex items-center justify-between gap-2">
-                <h2 className="font-bold text-lg group-hover:text-gold transition-colors">{m.name}</h2>
+                <h2 className="font-bold text-lg group-hover:text-blue transition-colors">{m.name}</h2>
                 <span className="text-[11px] text-ink/45 bg-paper-dark/60 px-2 py-0.5 rounded-full whitespace-nowrap">
                   {m.category}
                 </span>

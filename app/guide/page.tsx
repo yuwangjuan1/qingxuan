@@ -42,8 +42,8 @@ export default function GuidePage() {
             className={
               "px-5 py-2.5 rounded-full text-sm transition-all " +
               (tab === t
-                ? "bg-ink text-gold font-medium shadow-card"
-                : "bg-white border border-ink/10 text-ink/60 hover:border-gold hover:text-gold")
+                ? "bg-blue text-white font-medium shadow-card"
+                : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
             }
           >
             {t}

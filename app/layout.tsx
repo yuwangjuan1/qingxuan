@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="zh-CN">
       <body className="min-h-screen flex flex-col">
         <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-lg text-ink border-b border-ink/[0.06] shadow-[0_1px_12px_rgba(14,27,44,0.04)]">
-          <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="max-w-[1200px] mx-auto px-4 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-gold-light to-gold text-ink font-bold flex items-center justify-center text-sm shadow-gold">
                 青
@@ -48,29 +48,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link
                   key={n.href}
                   href={n.href}
-                  className="px-3.5 py-2 rounded-full text-ink/60 hover:text-gold-dark hover:bg-gold/[0.07] transition-colors"
+                  className="px-3.5 py-2 rounded-full text-ink/60 hover:text-blue hover:bg-blue/[0.07] transition-colors"
                 >
                   {n.label}
                 </Link>
               ))}
               <Link
                 href="/chat"
-                className="btn-gold ml-3 text-ink px-5 py-2 rounded-full font-medium"
+                className="btn-blue ml-3 text-white px-5 py-2 rounded-full font-medium"
               >
                 AI 顾问
               </Link>
             </nav>
             <Link
               href="/chat"
-              className="md:hidden btn-gold text-ink text-xs px-4 py-2 rounded-full font-medium"
+              className="md:hidden btn-blue text-white text-xs px-4 py-2 rounded-full font-medium"
             >
               问顾问
             </Link>
           </div>
         </header>
         <main className="flex-1">{children}</main>
-        <footer className="bg-ink text-paper/60 text-xs leading-relaxed">
-          <div className="max-w-6xl mx-auto px-4 py-12">
+        <footer className="bg-gradient-to-b from-[#123C7A] to-[#0B1D3A] text-paper/60 text-xs leading-relaxed">
+          <div className="max-w-[1200px] mx-auto px-4 py-12">
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 pb-8 border-b border-white/10">
               <div className="max-w-sm">
                 <p className="text-gold-light font-bold text-base tracking-widest mb-2">青选 · 高考志愿决策平台</p>

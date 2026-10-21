@@ -117,8 +117,8 @@ export default function ToolsPage() {
             className={
               "px-5 py-2.5 rounded-full text-sm transition-all " +
               (tab === t
-                ? "bg-ink text-gold font-medium shadow-card"
-                : "bg-white border border-ink/10 text-ink/60 hover:border-gold hover:text-gold")
+                ? "bg-blue text-white font-medium shadow-card"
+                : "bg-white border border-ink/10 text-ink/60 hover:border-blue/60 hover:text-blue")
             }
           >
             {t}
@@ -266,7 +266,7 @@ export default function ToolsPage() {
             onClick={() =>
               setWishes((w) => [...w, { id: Date.now(), school: "", group: "", tier: "稳", note: "" }])
             }
-            className="btn-gold mt-4 text-sm text-ink px-5 py-2.5 rounded-full font-medium"
+            className="btn-blue mt-4 text-sm text-white px-5 py-2.5 rounded-full font-medium"
           >
             + 添加一个志愿
           </button>

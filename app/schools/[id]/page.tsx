@@ -26,7 +26,7 @@ export default async function SchoolDetail({ params }: { params: Promise<{ id: s
           </Link>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <h1 className="text-3xl md:text-4xl font-bold">{s.name}</h1>
-            <span className="text-xs text-gold-dark bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">
+            <span className="text-xs text-blue bg-blue/10 border border-blue/25 px-3 py-1 rounded-full">
               {s.level}
             </span>
           </div>
@@ -77,7 +77,7 @@ export default async function SchoolDetail({ params }: { params: Promise<{ id: s
         </section>
       </div>
 
-      <div className="mt-8 hero-dark rounded-2xl text-paper/80 text-sm leading-loose p-6">
+      <div className="mt-8 hero-blue rounded-2xl text-paper/80 text-sm leading-loose p-6">
         想知道这所学校适合不适合你？让
         <Link href="/chat?advisor=qingxing" className="text-gold-light hover:underline mx-1">
           青杏
