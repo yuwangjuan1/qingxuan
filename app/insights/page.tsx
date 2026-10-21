@@ -1,5 +1,6 @@
 import { INSIGHTS } from "@/lib/data/insights";
 import PageBanner from "@/app/components/PageBanner";
+import NextStep from "@/app/components/NextStep";
 
 const toneStyle: Record<string, string> = {
   green: "bg-jade/10 border-jade/20 text-jade",
@@ -47,6 +48,16 @@ export default function InsightsPage() {
           </article>
         ))}
       </div>
+
+        <NextStep
+          eyebrow="下一步"
+          title="趋势是别人的，选择是你的"
+          desc="红绿灯只说明行业的整体水位，落到具体的人身上还要看城市、学校层次和家庭条件。把你自己的情况讲给顾问听，比对着榜单纠结有用。"
+          href="/chat"
+          label="和顾问聊聊我的情况"
+          altHref="/tools"
+          altLabel="用工具排志愿"
+        />
       </div>
     </div>
   );

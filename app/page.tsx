@@ -47,6 +47,30 @@ const stats = [
   { num: "3", label: "位 AI 顾问" },
 ];
 
+const steps = [
+  {
+    n: "01",
+    title: "报省份和位次",
+    desc: "只有分数？先去一分一段表换成位次。位次才是所有判断的锚点。",
+    href: "/tools",
+    label: "去换算位次",
+  },
+  {
+    n: "02",
+    title: "看你的候选区间",
+    desc: "冲、稳、保三档大致落在哪一段，先有区间，再谈具体学校。",
+    href: "/schools",
+    label: "圈定候选院校",
+  },
+  {
+    n: "03",
+    title: "把纠结聊清楚",
+    desc: "策略、专业、家庭分歧，三个顾问各管一段，你想不清楚的部分交给对话。",
+    href: "/chat",
+    label: "找顾问聊",
+  },
+];
+
 export default function Home() {
   return (
     <div>
@@ -98,6 +122,46 @@ export default function Home() {
                 <span className="text-sm text-white/60">{s.label}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 三步开始 */}
+      <section className="relative z-10">
+        <div className="max-w-[1200px] mx-auto px-4 -mt-14 md:-mt-16">
+          <div className="card p-6 md:p-8 shadow-[0_18px_50px_-16px_rgba(0,27,74,0.28)]">
+            <div className="flex items-end justify-between flex-wrap gap-3 mb-6">
+              <div>
+                <p className="text-[11px] tracking-[0.3em] text-blue/60 mb-2">第一次来？</p>
+                <h2 className="text-xl md:text-2xl font-bold">
+                  三步，从「我这分能报哪」走到「我该报哪个」
+                </h2>
+              </div>
+              <p className="text-sm text-ink/45">不用先搞懂规则，跟着走一遍就知道自己该干什么。</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-3 md:gap-4">
+              {steps.map((s, i) => (
+                <Link
+                  key={s.n}
+                  href={s.href}
+                  className="group relative rounded-xl border border-ink/8 bg-paper/40 hover:bg-white hover:border-blue/35 hover:shadow-card transition-all p-5 flex flex-col"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl font-bold text-gold/45 group-hover:text-gold transition-colors">
+                      {s.n}
+                    </span>
+                    <h3 className="font-bold text-base">{s.title}</h3>
+                    {i < steps.length - 1 && (
+                      <span className="hidden md:block ml-auto text-ink/15 group-hover:text-blue/40 transition-colors">→</span>
+                    )}
+                  </div>
+                  <p className="mt-2.5 text-sm text-ink/55 leading-relaxed flex-1">{s.desc}</p>
+                  <span className="mt-3 text-sm font-medium text-blue inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    {s.label} <span>→</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

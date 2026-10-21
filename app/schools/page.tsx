@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ALL_SCHOOLS } from "@/lib/data/schools";
 import PageBanner from "@/app/components/PageBanner";
+import NextStep from "@/app/components/NextStep";
 
 const TYPES = ["全部", "综合", "理工", "财经", "师范"];
 
@@ -111,6 +112,15 @@ export default function SchoolsPage() {
           ))}
         </div>
       )}
+
+        <NextStep
+          title="学校圈出来了，专业怎么选？"
+          desc="同一所大学里，专业组的差别可能比学校之间的差别还大。先给专业祛魅，再回头看院校，选择会清楚很多。"
+          href="/majors"
+          label="去看专业定位"
+          altHref="/chat?advisor=qingtang"
+          altLabel="找青棠聊专业"
+        />
       </div>
     </div>
   );
