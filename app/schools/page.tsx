@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ALL_SCHOOLS } from "@/lib/data/schools";
+import PageBanner from "@/app/components/PageBanner";
 
 const TYPES = ["全部", "综合", "理工", "财经", "师范"];
 
@@ -29,7 +30,7 @@ export default function SchoolsPage() {
   );
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-14">
+    <div>
       <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">学校介绍</h1>
         <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">

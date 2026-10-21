@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-blue: #1E56A0;
-  --color-blue-deep: #123C7A;
-  --color-blue-light: #4A7FD4;
-  --color-blue-pale: #EDF3FB;
+  --color-blue: #0062ff;
+  --color-blue-deep: #0043b8;
+  --color-blue-light: #4a8dff;
+  --color-blue-pale: #EDF3FF;
   --color-gold: #C9A227;
   --color-gold-light: #F2D06B;
   --color-gold-dark: #9A7B1A;
@@ -16,8 +16,7 @@
   --color-paper-dark: #E9EEF6;
   --shadow-card: 0 1px 2px rgba(14, 27, 44, 0.04), 0 4px 16px rgba(14, 27, 44, 0.06);
   --shadow-card-hover: 0 2px 4px rgba(14, 27, 44, 0.06), 0 12px 32px rgba(14, 27, 44, 0.12);
-  --shadow-blue: 0 4px 20px rgba(30, 86, 160, 0.35);
-  --shadow-gold: 0 4px 20px rgba(201, 162, 39, 0.35);
+  --shadow-blue: 0 4px 20px rgba(0, 98, 255, 0.35);
 }
 
 html {
@@ -34,11 +33,10 @@ body {
 }
 
 ::selection {
-  background: rgba(30, 86, 160, 0.18);
+  background: rgba(0, 98, 255, 0.16);
   color: var(--color-ink);
 }
 
-/* 细滚动条 */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -47,36 +45,35 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(30, 86, 160, 0.2);
+  background: rgba(0, 98, 255, 0.2);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(30, 86, 160, 0.4);
+  background: rgba(0, 98, 255, 0.4);
 }
 
-/* 统一聚焦态 */
 :focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* 学院蓝主按钮：渐变+光晕 */
+/* 学院蓝主按钮 */
 .btn-blue {
-  background: linear-gradient(135deg, #2E66B8 0%, #1E56A0 45%, #174A87 100%);
+  background: linear-gradient(135deg, #2e74ff 0%, #0062ff 45%, #0052d4 100%);
   box-shadow: var(--shadow-blue);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 .btn-blue:hover {
   filter: brightness(1.08);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(30, 86, 160, 0.45);
+  box-shadow: 0 6px 24px rgba(0, 98, 255, 0.45);
 }
 .btn-blue:active {
   transform: translateY(0);
 }
 
-/* 白卡：统一悬浮语言 */
+/* 白卡 */
 .card {
   background: #fff;
   border: 1px solid rgba(14, 27, 44, 0.06);
@@ -87,31 +84,120 @@ body {
 .card-hover:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
-  border-color: rgba(30, 86, 160, 0.3);
+  border-color: rgba(0, 98, 255, 0.35);
 }
 
-/* 首页全宽深蓝 banner：冰蓝/鎏金双光晕 + 渐隐细网格 */
-.hero-blue {
+/* ========== 全宽 Banner（#0062ff 深空渐变 + 动效层） ========== */
+.banner-deep {
   background:
-    radial-gradient(ellipse 55% 60% at 12% -10%, rgba(140, 190, 255, 0.22), transparent 60%),
-    radial-gradient(ellipse 50% 55% at 88% 0%, rgba(201, 162, 39, 0.16), transparent 60%),
-    linear-gradient(180deg, #0F2B57 0%, #1E56A0 100%);
+    linear-gradient(180deg, #001B4A 0%, #003AA8 55%, #0062FF 130%);
   position: relative;
-  overflow: hidden;
+  width: 100%;
 }
-.hero-blue::before {
+.banner-deep::after {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(247, 245, 240, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247, 245, 240, 0.04) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%);
+  background: radial-gradient(ellipse 90% 60% at 50% 120%, rgba(255, 255, 255, 0.10), transparent 60%);
   pointer-events: none;
 }
 
-/* 分区标题的小装饰线 */
+/* 光斑：缓慢漂移 */
+.banner-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.5;
+}
+.banner-orb-a {
+  width: 480px;
+  height: 480px;
+  left: -120px;
+  top: -160px;
+  background: radial-gradient(circle, rgba(120, 180, 255, 0.55), transparent 65%);
+  animation: orb-drift 14s ease-in-out infinite alternate;
+}
+.banner-orb-b {
+  width: 380px;
+  height: 380px;
+  right: -80px;
+  top: -60px;
+  background: radial-gradient(circle, rgba(242, 208, 107, 0.28), transparent 65%);
+  animation: orb-drift 18s ease-in-out infinite alternate-reverse;
+}
+.banner-orb-c {
+  width: 300px;
+  height: 300px;
+  left: 42%;
+  bottom: -180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 65%);
+  animation: orb-drift 22s ease-in-out infinite alternate;
+}
+@keyframes orb-drift {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(60px, 36px) scale(1.12);
+  }
+}
+
+/* 网格：透视渐隐 */
+.banner-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 8%, black 25%, transparent 72%);
+}
+
+/* 底部流光线 */
+.banner-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #F2D06B, #4A8DFF, transparent);
+  background-size: 220% 100%;
+  animation: beam-slide 6s linear infinite;
+  opacity: 0.85;
+}
+@keyframes beam-slide {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -60% 0;
+  }
+}
+
+/* 文案入场动效 */
+.banner-rise {
+  animation: rise-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-orb,
+  .banner-beam,
+  .banner-rise {
+    animation: none;
+  }
+}
+
+/* 分区标题装饰线 */
 .section-line {
   display: inline-block;
   width: 2.5rem;
@@ -120,17 +206,17 @@ body {
   background: linear-gradient(90deg, var(--color-blue), var(--color-blue-light));
 }
 
-/* 内页横幅：白底蓝晕光卡 */
+/* 内页横幅（现由 PageBanner 组件接管，此类保留给不支持 JS 的场景） */
 .page-banner {
   background:
-    radial-gradient(ellipse 60% 90% at 12% 0%, rgba(30, 86, 160, 0.08), transparent 55%),
-    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(74, 127, 212, 0.06), transparent 55%),
+    radial-gradient(ellipse 60% 90% at 12% 0%, rgba(0, 98, 255, 0.08), transparent 55%),
+    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(74, 141, 255, 0.06), transparent 55%),
     #FFFFFF;
-  border: 1px solid rgba(30, 86, 160, 0.1);
+  border: 1px solid rgba(0, 98, 255, 0.1);
   box-shadow: var(--shadow-card);
 }
 
-/* 输入框统一 */
+/* 输入框 */
 .field {
   background: #fff;
   border: 1px solid rgba(14, 27, 44, 0.1);
@@ -138,6 +224,6 @@ body {
 }
 .field:focus {
   border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(30, 86, 160, 0.12);
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.12);
   outline: none;
 }

@@ -1,4 +1,5 @@
 import { INSIGHTS } from "@/lib/data/insights";
+import PageBanner from "@/app/components/PageBanner";
 
 const toneStyle: Record<string, string> = {
   green: "bg-jade/10 border-jade/20 text-jade",
@@ -8,13 +9,15 @@ const toneStyle: Record<string, string> = {
 
 export default function InsightsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
-        <h1 className="text-3xl md:text-4xl font-bold">竞争与就业</h1>
-        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          {INSIGHTS.length} 条行业红绿灯：定性判断，来源公开可查。绿灯不是躺赢，红灯也不是劝退，是帮你把预期校准到真实水位。
-        </p>
-      </div>
+    <div>
+      <PageBanner
+        slides={[
+          { tag: "竞争与就业", title: "12 条行业红绿灯", desc: "定性判断，来源公开可查。绿灯不是躺赢，红灯也不是劝退，是帮你把预期校准到真实水位。" },
+          { tag: "竞争与就业", title: "医学的长周期，金融的降薪潮", desc: "十年长跑的专业和降薪缩编的行业，红绿灯里逐条讲清楚，帮你看懂时间维度上的性价比。" },
+          { tag: "竞争与就业", title: "银发经济与 AI 冲击", desc: "老龄化带来哪些确定性需求？AI 正在重构哪些专业？结构性变化早知道，选择少踩坑。" },
+        ]}
+      />
+      <div className="max-w-4xl mx-auto px-4">
       <div className="mt-8 space-y-5">
         {INSIGHTS.map((it) => (
           <article key={it.id} className="card card-hover p-7">
@@ -42,6 +45,7 @@ export default function InsightsPage() {
             <p className="mt-5 pt-4 border-t border-ink/5 text-xs text-ink/40">来源口径：{it.source}</p>
           </article>
         ))}
+      </div>
       </div>
     </div>
   );

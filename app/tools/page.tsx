@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import PageBanner from "@/app/components/PageBanner";
 
 const TABS = [
   "冲稳保定位计算器",
@@ -101,13 +102,12 @@ export default function ToolsPage() {
   }, [wishes]);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-14">
-      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
-        <h1 className="text-3xl md:text-4xl font-bold">择校工具</h1>
-        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
-          把方法论变成可勾选的动作。所有结果只在你本地浏览器里计算，不收集任何信息。
-        </p>
-      </div>
+    <div>
+      <PageBanner
+        tag="择校工具"
+        title="五个工具，把纠结变成动作"
+        desc="位次分档、梯度自查、防退档终检、志愿清单、二选一矩阵。全部在本地浏览器计算，不收集任何信息。"
+      />
 
       <div className="mt-8 flex flex-wrap gap-2">
         {TABS.map((t) => (

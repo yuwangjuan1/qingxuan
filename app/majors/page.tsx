@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ALL_MAJORS, TRAP_LABEL } from "@/lib/data/majors";
+import PageBanner from "@/app/components/PageBanner";
 
 export default function MajorsPage() {
   const [query, setQuery] = useState("");
@@ -28,7 +29,7 @@ export default function MajorsPage() {
   const trapCount = ALL_MAJORS.filter((m) => m.isTrap).length;
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 py-14">
+    <div>
       <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">专业定位</h1>
         <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
