@@ -29,9 +29,9 @@ export default function MajorsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-14">
-      <div className="page-banner text-paper rounded-3xl px-8 py-10 md:px-12">
+      <div className="page-banner rounded-3xl px-8 py-10 md:px-12">
         <h1 className="text-3xl md:text-4xl font-bold">专业定位</h1>
-        <p className="mt-3 text-paper/60 max-w-2xl leading-relaxed text-sm md:text-base">
+        <p className="mt-3 text-ink/60 max-w-2xl leading-relaxed text-sm md:text-base">
           {ALL_MAJORS.length} 个专业讲清四件事：学什么、四个出口、适合谁、坑在哪。已收录 {trapCount} 个名称陷阱专业，报前先祛魅。
         </p>
       </div>

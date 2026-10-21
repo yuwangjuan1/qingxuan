@@ -19,9 +19,9 @@ export default async function SchoolDetail({ params }: { params: Promise<{ id: s
 
   return (
     <div className="max-w-4xl mx-auto px-4 pb-16">
-      <div className="page-banner text-paper -mx-4 px-6 md:px-0">
+      <div className="page-banner -mx-4 px-6 md:px-0">
         <div className="max-w-4xl mx-auto pt-6 pb-10">
-          <Link href="/schools" className="text-sm text-paper/50 hover:text-gold-light transition-colors">
+          <Link href="/schools" className="text-sm text-ink/45 hover:text-gold-dark transition-colors">
             ← 返回列表
           </Link>
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -30,12 +30,12 @@ export default async function SchoolDetail({ params }: { params: Promise<{ id: s
               {s.level}
             </span>
           </div>
-          <p className="mt-3 text-paper/55">
+          <p className="mt-3 text-ink/55">
             {s.city} · {s.type}类
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {s.tags.map((t) => (
-              <span key={t} className="text-xs border border-white/15 bg-white/5 rounded-full px-3 py-1 text-paper/70">
+              <span key={t} className="text-xs border border-ink/10 bg-ink/[0.03] rounded-full px-3 py-1 text-ink/60">
                 {t}
               </span>
             ))}

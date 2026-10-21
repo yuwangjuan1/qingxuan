@@ -96,7 +96,38 @@ body {
   border-color: rgba(201, 162, 39, 0.35);
 }
 
-/* hero 深底：径向光晕 + 细网格 */
+/* 页面横幅：浅色光晕卡 */
+.page-banner {
+  background:
+    radial-gradient(ellipse 60% 90% at 15% 0%, rgba(201, 162, 39, 0.10), transparent 55%),
+    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(46, 163, 166, 0.08), transparent 55%),
+    #FFFFFF;
+  border: 1px solid rgba(14, 27, 44, 0.06);
+  box-shadow: var(--shadow-card);
+}
+
+/* hero 浅底：金色/青碧光晕 + 渐隐细网格 */
+.hero-light {
+  background:
+    radial-gradient(ellipse 55% 60% at 12% -10%, rgba(201, 162, 39, 0.14), transparent 60%),
+    radial-gradient(ellipse 50% 55% at 88% 0%, rgba(46, 163, 166, 0.10), transparent 60%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7F5F0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14, 27, 44, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 27, 44, 0.028) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%);
+  pointer-events: none;
+}
+
+/* 深色点缀卡（首页理念/详情页引流条/页脚锚定用） */
 .hero-dark {
   background:
     radial-gradient(ellipse 60% 50% at 15% 0%, rgba(201, 162, 39, 0.18), transparent 60%),
@@ -124,13 +155,6 @@ body {
   height: 3px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
-}
-
-/* 详情页顶部横幅 */
-.page-banner {
-  background:
-    radial-gradient(ellipse 70% 90% at 20% 0%, rgba(201, 162, 39, 0.14), transparent 55%),
-    linear-gradient(160deg, #0E1B2C 0%, #1C2E45 100%);
 }
 
 /* 输入框统一 */
