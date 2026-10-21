@@ -19,7 +19,7 @@ export default function InsightsPage() {
         ]}
       />
       <div className="max-w-[1200px] mx-auto px-4">
-      <div className="mt-8 space-y-5">
+      <div className="mt-10 grid md:grid-cols-2 gap-5">
         {INSIGHTS.map((it) => (
           <article key={it.id} className="card card-hover p-7">
             <div className="flex flex-wrap items-center gap-3">

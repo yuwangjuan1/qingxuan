@@ -106,7 +106,7 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
         </section>
       </div>
 
-      <div className="mt-8 hero-blue rounded-2xl text-paper/80 text-sm leading-loose p-6">
+      <div className="mt-8 banner-deep theme-blue rounded-2xl text-paper/85 text-base leading-loose p-7 relative overflow-hidden">
         拿不准适不适合？找
         <Link href="/chat?advisor=qingtang" className="text-gold-light hover:underline mx-1">
           青棠

@@ -81,7 +81,7 @@ export default async function SchoolDetail({ params }: { params: Promise<{ id: s
         </section>
       </div>
 
-      <div className="mt-8 hero-blue rounded-2xl text-paper/80 text-sm leading-loose p-6">
+      <div className="mt-8 banner-deep theme-blue rounded-2xl text-paper/85 text-base leading-loose p-7 relative overflow-hidden">
         想知道这所学校适合不适合你？让
         <Link href="/chat?advisor=qingxing" className="text-gold-light hover:underline mx-1">
           青杏
