@@ -25,63 +25,86 @@ export default async function MajorDetail({ params }: { params: Promise<{ id: st
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href="/majors" className="text-sm text-jade hover:underline">
-        返回列表
-      </Link>
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <h1 className="text-3xl font-bold">{m.name}</h1>
-        <span className="text-sm text-ink/50 bg-paper px-3 py-1 rounded-full">{m.category}</span>
-        {m.isTrap && (
-          <span className="text-sm text-red-600 bg-red-50 px-3 py-1 rounded-full border border-red-200">
-            {TRAP_LABEL}
-          </span>
-        )}
-      </div>
-      {m.isTrap && (
-        <div className="mt-6 rounded-2xl p-6 bg-red-50 border border-red-200">
-          <h2 className="font-bold text-red-700 mb-2">先祛魅再心动</h2>
-          <p className="text-sm leading-relaxed text-red-900/80">{m.trapNote}</p>
+    <div className="max-w-4xl mx-auto px-4 pb-16">
+      <div className="page-banner text-paper -mx-4 px-6 md:px-0">
+        <div className="max-w-4xl mx-auto pt-6 pb-10">
+          <Link href="/majors" className="text-sm text-paper/50 hover:text-gold-light transition-colors">
+            ← 返回列表
+          </Link>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold">{m.name}</h1>
+            <span className="text-xs text-paper/60 bg-white/10 border border-white/15 px-3 py-1 rounded-full">
+              {m.category}
+            </span>
+            {m.isTrap && (
+              <span className="text-xs text-red-300 bg-red-500/15 border border-red-400/30 px-3 py-1 rounded-full">
+                {TRAP_LABEL}
+              </span>
+            )}
+          </div>
+          {m.isTrap && (
+            <div className="mt-5 rounded-2xl p-5 bg-red-500/10 border border-red-400/25">
+              <h2 className="font-bold text-red-300 mb-1.5 text-sm">先祛魅再心动</h2>
+              <p className="text-sm leading-loose text-paper/70">{m.trapNote}</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
-      <section className="mt-6 bg-white rounded-2xl p-6 border border-black/5">
-        <h2 className="font-bold text-lg mb-2">这个专业学什么</h2>
-        <p className="text-sm leading-relaxed text-ink/80">{m.what}</p>
+      <section className="card p-7 -mt-5 relative rounded-3xl">
+        <h2 className="font-bold text-lg mb-3 flex items-center gap-2">
+          <span className="section-line !w-6" />
+          这个专业学什么
+        </h2>
+        <p className="text-sm leading-loose text-ink/75">{m.what}</p>
       </section>
 
-      <section className="mt-6">
-        <h2 className="font-bold text-lg mb-4">四出口地图</h2>
+      <section className="mt-8">
+        <h2 className="font-bold text-lg mb-5 flex items-center gap-2">
+          <span className="section-line !w-6" />
+          四出口地图
+        </h2>
         <div className="grid md:grid-cols-2 gap-4">
           {exits.map((e) => (
-            <div key={e.label} className="rounded-2xl p-5 bg-white border border-black/5">
-              <h3 className="text-sm font-bold text-gold">{e.label}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-ink/70">{e.value}</p>
+            <div key={e.label} className="card card-hover p-6">
+              <h3 className="text-xs font-bold text-gold-dark tracking-widest border-b border-gold/15 pb-2.5 mb-3">
+                {e.label}
+              </h3>
+              <p className="text-sm leading-loose text-ink/70">{e.value}</p>
             </div>
           ))}
         </div>
       </section>
-      <div className="mt-6 grid md:grid-cols-2 gap-6">
-        <section className="rounded-2xl p-6 bg-jade/10 border border-jade/20">
-          <h2 className="font-bold mb-2">适合你吗</h2>
-          <ul className="space-y-1.5">
+
+      <div className="mt-8 grid md:grid-cols-2 gap-5">
+        <section className="rounded-2xl p-6 bg-jade/5 border border-jade/20">
+          <h2 className="font-bold mb-3 flex items-center gap-2 text-jade">
+            <span className="w-1.5 h-4 rounded-full bg-jade" />
+            适合你吗
+          </h2>
+          <ul className="space-y-2">
             {m.fitFor.map((f, i) => (
-              <li key={i} className="text-sm leading-relaxed flex gap-2">
-                <span className="text-jade">OK</span>
+              <li key={i} className="text-sm leading-relaxed flex gap-2.5">
+                <span className="shrink-0 w-4 h-4 rounded-full bg-jade/15 text-jade text-[10px] flex items-center justify-center mt-1">
+                  ✓
+                </span>
                 <span>{f}</span>
               </li>
             ))}
           </ul>
         </section>
-        <section className="rounded-2xl p-6 bg-red-50 border border-red-100">
-          <h2 className="font-bold mb-2 text-red-700">报考预警</h2>
-          <p className="text-sm leading-relaxed text-red-900/80">{m.warning}</p>
+        <section className="rounded-2xl p-6 bg-red-50/70 border border-red-100">
+          <h2 className="font-bold mb-3 flex items-center gap-2 text-red-700">
+            <span className="w-1.5 h-4 rounded-full bg-red-400" />
+            报考预警
+          </h2>
+          <p className="text-sm leading-loose text-red-900/75">{m.warning}</p>
         </section>
       </div>
 
-      <div className="mt-8 p-5 rounded-2xl bg-ink text-paper/80 text-sm leading-relaxed">
+      <div className="mt-8 hero-dark rounded-2xl text-paper/80 text-sm leading-loose p-6">
         拿不准适不适合？找
-        <Link href="/chat?advisor=qingtang" className="text-gold hover:underline mx-1">
+        <Link href="/chat?advisor=qingtang" className="text-gold-light hover:underline mx-1">
           青棠
         </Link>
         做一次三角定位，用证据代替感觉。
