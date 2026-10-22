@@ -29,24 +29,12 @@ export default function PageBanner({ slides = FALLBACK, tag, title, desc, stats,
 
   return (
     <section className={"banner-deep text-white overflow-hidden theme-" + theme}>
-      {/* 动效层 */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* 光斑 */}
-        <div className="banner-orb banner-orb-a" />
-        <div className="banner-orb banner-orb-b" />
-        <div className="banner-orb banner-orb-c" />
-        {/* 网格 */}
-        <div className="banner-grid" />
-        {/* 流光底线 */}
-        <div className="banner-beam" />
-      </div>
-
       <div className="relative max-w-[1200px] mx-auto px-4 h-[400px] flex flex-col justify-center">
         <p
           key={"tag" + idx}
-          className="banner-rise text-[13px] tracking-[0.35em] text-[#BBD4FF] mb-5 inline-flex items-center gap-2.5 w-fit border border-white/20 bg-white/10 backdrop-blur-sm rounded-full px-5 py-1.5"
+          className="banner-rise flex items-center gap-3 text-sm text-[#BBD4FF] mb-5"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-gold-light animate-pulse" />
+          <span className="w-8 h-px bg-[#BBD4FF]/70" />
           {cur.tag || tag}
         </p>
         <h1

@@ -94,10 +94,10 @@ export default function GuidePage() {
               <div className="flex items-start gap-4">
                 <span
                   className={
-                    "shrink-0 w-8 h-8 rounded-xl text-xs font-bold flex items-center justify-center " +
+                    "shrink-0 w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center " +
                     (p.level === "high"
-                      ? "bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25"
-                      : "bg-gradient-to-br from-amber-400 to-amber-500 text-white shadow-lg shadow-amber-400/25")
+                      ? "bg-red-50 text-red-600 border border-red-200"
+                      : "bg-amber-50 text-amber-700 border border-amber-200")
                   }
                 >
                   {String(i + 1).padStart(2, "0")}
