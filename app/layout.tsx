@@ -34,14 +34,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg text-ink border-b border-ink/[0.06] shadow-[0_1px_12px_rgba(14,27,44,0.05)]">
           <div className="max-w-[1200px] mx-auto px-4 h-[76px] flex items-center justify-between">
             <Link href="/" className="flex items-center gap-3 group">
-              <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-light to-gold text-white font-bold flex items-center justify-center text-lg shadow-gold">
+              <span className="w-10 h-10 rounded-lg bg-gold text-white font-bold flex items-center justify-center text-lg">
                 青
               </span>
               <span className="flex flex-col leading-none">
-                <span className="font-bold tracking-widest text-xl">
+                <span className="font-bold tracking-wide text-xl">
                   青选<span className="text-gold">.</span>
                 </span>
-                <span className="text-[11px] tracking-[0.22em] text-ink/40 mt-1">QINGXUAN</span>
+                <span className="text-[11px] tracking-[0.14em] text-ink/40 mt-1">QINGXUAN</span>
               </span>
             </Link>
             <Nav />

@@ -28,10 +28,10 @@ export default function Nav() {
               href={n.href}
               aria-current={active ? "page" : undefined}
               className={
-                "px-4 py-2.5 rounded-full transition-all duration-200 " +
+                "px-4 py-2.5 rounded-lg transition-colors duration-150 " +
                 (active
-                  ? "bg-blue text-white font-semibold shadow-blue"
-                  : "text-ink/65 hover:text-blue hover:bg-blue/[0.08] font-medium")
+                  ? "bg-blue-pale text-blue font-semibold"
+                  : "text-ink/65 hover:text-blue hover:bg-blue/[0.06] font-medium")
               }
             >
               {n.label}
@@ -41,7 +41,7 @@ export default function Nav() {
         <Link
           href="/chat"
           className={
-            "btn-blue ml-3 px-6 py-2.5 rounded-full font-medium " +
+            "btn-blue text-white ml-3 px-6 py-2.5 rounded-full font-medium " +
             (pathname === "/chat" ? "ring-2 ring-blue/30 ring-offset-2" : "")
           }
         >

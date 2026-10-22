@@ -16,12 +16,9 @@
   --color-paper-dark: #E9EEF6;
   --shadow-card: 0 1px 2px rgba(14, 27, 44, 0.04), 0 4px 16px rgba(14, 27, 44, 0.06);
   --shadow-card-hover: 0 2px 4px rgba(14, 27, 44, 0.06), 0 12px 32px rgba(14, 27, 44, 0.12);
-  --shadow-blue: 0 4px 20px rgba(0, 98, 255, 0.35);
+  --shadow-blue: 0 2px 8px rgba(0, 98, 255, 0.22);
 }
-
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--color-paper);
@@ -32,46 +29,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection {
-  background: rgba(0, 98, 255, 0.16);
-  color: var(--color-ink);
-}
+::selection { background: rgba(0, 98, 255, 0.16); color: var(--color-ink); }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 98, 255, 0.2);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 98, 255, 0.4);
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0, 98, 255, 0.2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 98, 255, 0.4); }
 
 :focus-visible {
   outline: 2px solid var(--color-blue);
   outline-offset: 2px;
   border-radius: 4px;
 }
-
-/* 学院蓝主按钮 */
+/* 主按钮 */
 .btn-blue {
-  background: linear-gradient(135deg, #2e74ff 0%, #0062ff 45%, #0052d4 100%);
+  background: var(--color-blue);
   box-shadow: var(--shadow-blue);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
-.btn-blue:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0, 98, 255, 0.45);
-}
-.btn-blue:active {
-  transform: translateY(0);
-}
+.btn-blue:hover { background: var(--color-blue-deep); box-shadow: 0 3px 12px rgba(0, 98, 255, 0.28); }
+.btn-blue:active { background: var(--color-blue-deep); }
 
 /* 白卡 */
 .card {
@@ -79,164 +56,34 @@ body {
   border: 1px solid rgba(14, 27, 44, 0.06);
   border-radius: 1rem;
   box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .card-hover:hover {
-  transform: translateY(-3px);
   box-shadow: var(--shadow-card-hover);
-  border-color: rgba(0, 98, 255, 0.35);
+  border-color: rgba(0, 98, 255, 0.3);
 }
-
-/* ========== 全宽 Banner（多彩主题渐变 + 动效层） ========== */
+/* 深色横幅：干净的深度渐变 */
 .banner-deep {
-  background:
-    linear-gradient(180deg, var(--bg1, #001B4A) 0%, var(--bg2, #003AA8) 55%, var(--bg3, #0062FF) 130%);
+  background: linear-gradient(165deg, var(--bg1, #001B4A) 0%, var(--bg2, #003AA8) 62%, var(--bg3, #0062FF) 135%);
   position: relative;
   width: 100%;
 }
-.banner-deep::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 90% 60% at 50% 120%, rgba(255, 255, 255, 0.10), transparent 60%);
-  pointer-events: none;
-}
 
-/* 页面主题：学院蓝 / 橙 / 翠绿 / 紫 / 玫红 */
-.theme-blue {
-  --bg1: #001B4A;
-  --bg2: #003AA8;
-  --bg3: #0062FF;
-  --orb1: rgba(120, 180, 255, 0.55);
-  --orb2: rgba(242, 208, 107, 0.28);
-  --orb3: rgba(255, 255, 255, 0.22);
-}
-.theme-orange {
-  --bg1: #4A1D08;
-  --bg2: #9A3412;
-  --bg3: #EA580C;
-  --orb1: rgba(251, 146, 60, 0.5);
-  --orb2: rgba(250, 204, 21, 0.35);
-  --orb3: rgba(255, 237, 213, 0.25);
-}
-.theme-emerald {
-  --bg1: #022C22;
-  --bg2: #065F46;
-  --bg3: #059669;
-  --orb1: rgba(52, 211, 153, 0.45);
-  --orb2: rgba(250, 204, 21, 0.3);
-  --orb3: rgba(236, 253, 245, 0.22);
-}
-.theme-violet {
-  --bg1: #2E1065;
-  --bg2: #6D28D9;
-  --bg3: #8B5CF6;
-  --orb1: rgba(196, 181, 253, 0.5);
-  --orb2: rgba(242, 208, 107, 0.3);
-  --orb3: rgba(245, 243, 255, 0.22);
-}
-.theme-rose {
-  --bg1: #4C0519;
-  --bg2: #BE123C;
-  --bg3: #F43F5E;
-  --orb1: rgba(253, 164, 175, 0.5);
-  --orb2: rgba(250, 204, 21, 0.3);
-  --orb3: rgba(255, 241, 242, 0.22);
-}
-
-/* 光斑：缓慢漂移 */
-.banner-orb {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.5;
-}
-.banner-orb-a {
-  width: 480px;
-  height: 480px;
-  left: -120px;
-  top: -160px;
-  background: radial-gradient(circle, var(--orb1, rgba(120, 180, 255, 0.55)), transparent 65%);
-  animation: orb-drift 14s ease-in-out infinite alternate;
-}
-.banner-orb-b {
-  width: 380px;
-  height: 380px;
-  right: -80px;
-  top: -60px;
-  background: radial-gradient(circle, var(--orb2, rgba(242, 208, 107, 0.28)), transparent 65%);
-  animation: orb-drift 18s ease-in-out infinite alternate-reverse;
-}
-.banner-orb-c {
-  width: 300px;
-  height: 300px;
-  left: 42%;
-  bottom: -180px;
-  background: radial-gradient(circle, var(--orb3, rgba(255, 255, 255, 0.22)), transparent 65%);
-  animation: orb-drift 22s ease-in-out infinite alternate;
-}
-@keyframes orb-drift {
-  from {
-    transform: translate(0, 0) scale(1);
-  }
-  to {
-    transform: translate(60px, 36px) scale(1.12);
-  }
-}
-
-/* 网格：透视渐隐 */
-.banner-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 8%, black 25%, transparent 72%);
-}
-
-/* 底部流光线 */
-.banner-beam {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #F2D06B, #4A8DFF, transparent);
-  background-size: 220% 100%;
-  animation: beam-slide 6s linear infinite;
-  opacity: 0.85;
-}
-@keyframes beam-slide {
-  from {
-    background-position: 180% 0;
-  }
-  to {
-    background-position: -60% 0;
-  }
-}
-
-/* 文案入场动效 */
-.banner-rise {
-  animation: rise-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+/* 页面主题 */
+.theme-blue { --bg1: #001B4A; --bg2: #003AA8; --bg3: #0062FF; }
+.theme-orange { --bg1: #4A1D08; --bg2: #9A3412; --bg3: #EA580C; }
+.theme-emerald { --bg1: #022C22; --bg2: #065F46; --bg3: #059669; }
+.theme-violet { --bg1: #2E1065; --bg2: #6D28D9; --bg3: #8B5CF6; }
+.theme-rose { --bg1: #4C0519; --bg2: #BE123C; --bg3: #F43F5E; }
+/* 文案入场（克制） */
+.banner-rise { animation: rise-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .banner-orb,
-  .banner-beam,
-  .banner-rise {
-    animation: none;
-  }
+  .banner-rise { animation: none; }
 }
 
 /* 分区标题装饰线 */
@@ -245,27 +92,17 @@ body {
   width: 2.5rem;
   height: 3px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-blue), var(--color-blue-light));
-}
-
-/* 内页横幅（现由 PageBanner 组件接管，此类保留给不支持 JS 的场景） */
-.page-banner {
-  background:
-    radial-gradient(ellipse 60% 90% at 12% 0%, rgba(0, 98, 255, 0.08), transparent 55%),
-    radial-gradient(ellipse 50% 80% at 90% 10%, rgba(74, 141, 255, 0.06), transparent 55%),
-    #FFFFFF;
-  border: 1px solid rgba(0, 98, 255, 0.1);
-  box-shadow: var(--shadow-card);
+  background: var(--color-blue);
 }
 
 /* 输入框 */
 .field {
   background: #fff;
   border: 1px solid rgba(14, 27, 44, 0.1);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .field:focus {
   border-color: var(--color-blue);
-  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(0, 98, 255, 0.1);
   outline: none;
 }
